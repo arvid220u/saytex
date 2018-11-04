@@ -129,7 +129,7 @@ def endtext(text):
     return text"""
 
     r = requests.get('https://www.wolframcloud.com/objects/arvid/latexdictation/stringtolatex?x=' + urllib.parse.quote_plus(text))
-    return r
+    return r.text
 
 def text2latex(text):
     text=text.lower().replace('some', 'sum')
