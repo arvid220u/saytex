@@ -3,8 +3,6 @@ import requests
 import urllib
 import pexpect
 
-APPID="V5KXEA-HL5T9LY4T7"
-
 from shuntington import evaluate
 from shuntington import lineareval
 
@@ -112,6 +110,7 @@ def endtext(text):
     #if 'sum' not in text and 'integral' not in text:
     #    return text2latex(text)
     
+    """
     r=requests.get("http://api.wolframalpha.com/v2/query?appid="+APPID+"&format=minput&output=json&input="+urllib.parse.quote_plus(text)).json()
     print(r)
     try:
@@ -127,7 +126,10 @@ def endtext(text):
         return ' '
     #text=evaluate(text)
     print(text)
-    return text
+    return text"""
+
+    r = requests.get('https://www.wolframcloud.com/objects/arvid/latexdictation/stringtolatex?x=' + urllib.parse.quote_plus(text))
+    return r
 
 def text2latex(text):
     text=text.lower().replace('some', 'sum')
