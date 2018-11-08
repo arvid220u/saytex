@@ -1,0 +1,148 @@
+<html>
+<head>
+   <title>Microsoft Cognitive Service Speech SDK JavaScript Quickstart</title>
+</head>
+<body>
+ <!-- UI code goes here -->
+
+ <div id="warning">
+  <h1 style="font-weight:500;">Speech Recognition Speech SDK not found (microsoft.cognitiveservices.speech.sdk.bundle.js missing).</h1>
+</div>
+
+<div id="content" style="display:none">
+  <table width="100%">
+    <tr>
+      <td></td>
+      <td><h1 style="font-weight:500;">Microsoft Cognitive Services Speech SDK JavaScript Quickstart</h1></td>
+    </tr>
+    <tr>
+      <td align="right"><a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/get-started" target="_blank">Subscription</a>:</td>
+      <td><input id="subscriptionKey" type="text" size="40" value="subscription"></td>
+    </tr>
+    <tr>
+      <td align="right">Region</td>
+      <td><input id="regionKey" type="text" size="40" value="YourSubscriptionServiceRegion"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button id="startButton">Start recognition</button></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button id="stopButton" disabled>Stop recognition</button></td>
+    </tr>
+    <tr>
+      <td align="right" valign="top">Results</td>
+      <td><textarea id="phraseDiv" style="display: inline-block;width:500px;height:200px"></textarea></td>
+    </tr>
+  </table>
+</div>
+
+<!-- SDK reference goes here -->
+<script src="microsoft.cognitiveservices.speech.sdk.bundle.js"></script>
+
+<!-- Speech SDK USAGE -->
+<script>
+    // status fields and start button in UI
+    var phraseDiv;
+    var startRecognizeOnceAsyncButton;
+
+    // subscription key and region key for speech services.
+    var subscriptionKey, regionKey;
+    var authorizationToken;
+    var SpeechSDK;
+    var recognizer;
+
+    document.addEventListener("DOMContentLoaded", function () {
+        startButton = document.getElementById("startButton");
+        stopButton = document.getElementById("stopButton");
+        subscriptionKey = document.getElementById("subscriptionKey");
+        regionKey = document.getElementById("regionKey");
+        phraseDiv = document.getElementById("phraseDiv");
+
+        startButton.addEventListener("click", function () {
+
+
+            phraseDiv.innerHTML = "";
+
+            // if we got an authorization token, use the token. Otherwise use the provided subscription key
+            var speechConfig;
+            if (authorizationToken) {
+                speechConfig = SpeechSDK.SpeechConfig.fromAuthorizationToken(authorizationToken, regionKey.value);
+            } else {
+                if (subscriptionKey.value === "" || subscriptionKey.value === "subscription") {
+                    alert("Please enter your Microsoft Cognitive Services Speech subscription key!");
+                    return;
+                }
+                speechConfig = SpeechSDK.SpeechConfig.fromSubscription(subscriptionKey.value, regionKey.value);
+            }
+
+            speechConfig.speechRecognitionLanguage = "en-US";
+            var audioConfig  = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
+            recognizer = new SpeechSDK.SpeechRecognizer(speechConfig, audioConfig);
+
+            
+            recognizer.recognizing = function (r, ev) {
+                console.log('recognizing!');
+                phraseDiv.innerHTML = ev.result.text;
+            };
+
+
+            recognizer.startContinuousRecognitionAsync(
+            function (result) {
+                //startRecognizeOnceAsyncButton.disabled = false;
+                //phraseDiv.innerHTML += result.text;
+                //window.console.log(result);
+
+                //recognizer.close();
+                //recognizer = undefined;
+                startButton.disabled = true;
+                stopButton.disabled = false;
+                phraseDiv.innerHTML = '';
+                console.log('starting continuous speech recognition');
+            },
+            function (err) {
+                startButton.disabled = false;
+                stopButton.disabled = true;
+                phraseDiv.innerHTML += err;
+                window.console.log(err);
+
+                recognizer.close();
+                recognizer = undefined;
+            });
+        });
+        stopButton.addEventListener("click", function () {
+            startButton.disabled = false;
+            stopButton.disabled = true;
+
+            recognizer.stopContinuousRecognitionAsync(
+                function(result) {
+                    console.log('stopping continuous speech recognition');
+                },
+                function (err) {
+                    console.log(err);
+                }
+            );
+        });
+
+        if (!!window.SpeechSDK) {
+            SpeechSDK = window.SpeechSDK;
+            startButton.disabled = false;
+
+            document.getElementById('content').style.display = 'block';
+            document.getElementById('warning').style.display = 'none';
+
+            // in case we have a function for getting an authorization token, call it.
+            if (typeof RequestAuthorizationToken === "function") {
+              RequestAuthorizationToken();
+            }
+        }
+    });
+</script>
+
+
+ <!-- Optional authorization token request goes here -->
+
+ <!-- Sample code goes here -->
+</body>
+</html>
