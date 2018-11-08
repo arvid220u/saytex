@@ -4,4 +4,4 @@
 
 MICROSOFT_SPEECH_API_KEY = 'insert microsoft cognitive services speech API key here'
 
-API_URL = '127.0.0.1:3000' # DEVELOPMENT
+API_URL = '127.0.0.1:8000' # DEVELOPMENT
