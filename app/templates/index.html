@@ -1,13 +1,13 @@
+<!DOCTYPE html>
 <html>
 <head>
-   <title>Microsoft Cognitive Service Speech SDK JavaScript Quickstart</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>SayTeX</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0">
 </head>
 <body>
  <!-- UI code goes here -->
-
- <div id="warning">
-  <h1 style="font-weight:500;">Speech Recognition Speech SDK not found (microsoft.cognitiveservices.speech.sdk.bundle.js missing).</h1>
-</div>
 
 <div id="content" style="display:none">
   <table width="100%">
@@ -39,7 +39,7 @@
 </div>
 
 <!-- SDK reference goes here -->
-<script src="microsoft.cognitiveservices.speech.sdk.bundle.js"></script>
+<script src="{{ url_for('static', filename='microsoft.cognitiveservices.speech.sdk.bundle.js') }}"></script>
 
 <!-- Speech SDK USAGE -->
 <script>
