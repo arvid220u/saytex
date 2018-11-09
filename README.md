@@ -1,2 +1,2 @@
-# latexdictation
+# SayTeX
 Dictate math, get LaTeX!
