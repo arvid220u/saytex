@@ -4,20 +4,42 @@ from flask import *
 app = Flask(__name__)
 app.config["PREFERRED_URL_SCHEME"] = "https"
 
+from crossdomain import crossdomain
+
+from flask import Response
+
+import latexconversion
 
 
-# IMPORTANT THINGS START HERE
+
+@app.route("/full/<string:text>")
+@crossdomain(origin='*')
+def fullapi(text):
+    return latexconversion.wolframlatex(text)
 
 
 
-from main import text2latex, endtext
-@app.route("/api/<string:text>")
-def API(text):
-    return text2latex(text)
 
-@app.route("/api2/<string:text>")
-def API2(text):
-    print("api2")
-    return endtext(text)
+@app.route("/fast/<string:text>")
+@crossdomain(origin='*')
+def fastapi(text):
+    """
+    converts string to latex using fast methods (no external APIs)
+    if string cannot be parsed, it returns an error
 
+    parameters:
+        text: the spoken string to be converted into latex code
+
+    returns:
+        latex code
+    """
+
+    #try:
+    # convert using simple method
+    latex = latexconversion.simplelatex(text)
+    """except:
+        # return an error
+        return Response('String could not be converted into LaTeX.', status=400)"""
+
+    return latex
 
