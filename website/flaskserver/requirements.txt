@@ -1,5 +1,0 @@
-flask
-gunicorn
-redis
-requests
-pexpect
