@@ -4,39 +4,93 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>SayTeX</title>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename=css_filename) }}">
     <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0">
 </head>
 <body>
- <!-- UI code goes here -->
 
-<div id="content" style="display:none">
-  <table width="100%">
-    <tr>
-      <td></td>
-      <td><h1 style="font-weight:500;">Microsoft Cognitive Services Speech SDK JavaScript Quickstart</h1></td>
-    </tr>
-    <tr>
-      <td align="right"><a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/get-started" target="_blank">Subscription</a>:</td>
-      <td><input id="subscriptionKey" type="text" size="40" value="subscription"></td>
-    </tr>
-    <tr>
-      <td align="right">Region</td>
-      <td><input id="regionKey" type="text" size="40" value="YourSubscriptionServiceRegion"></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><button id="startButton">Start recognition</button></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><button id="stopButton" disabled>Stop recognition</button></td>
-    </tr>
-    <tr>
-      <td align="right" valign="top">Results</td>
-      <td><textarea id="phraseDiv" style="display: inline-block;width:500px;height:200px"></textarea></td>
-    </tr>
-  </table>
+<script>
+    // copy button script
+    /*var copyButton = document.querySelector('.copybutton');
+    copyButton.addEventListener('click', function(event) {
+        // Select the copy anchor text
+        var emailLink = document.querySelector('.copytext');
+        var range = document.createRange();
+        range.selectNode(emailLink);
+        window.getSelection().addRange(range);
+
+        try {
+            // Now that we've selected the anchor text, execute the copy command
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            console.log('Copy email command was ' + msg);
+        } catch(err) {
+            console.log('Oops, unable to copy');
+        }
+
+        // Remove the selections - NOTE: Should use
+        // removeRange(range) when it is supported
+        window.getSelection().removeAllRanges();
+    });*/
+
+    function copyToClipboard(copy_from_class) {
+        // Select the copy anchor text
+        var emailLink = document.querySelector(copy_from_class);
+        var range = document.createRange();
+        range.selectNode(emailLink);
+        window.getSelection().addRange(range);
+
+        try {
+            // Now that we've selected the anchor text, execute the copy command
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            console.log('Copy email command was ' + msg);
+        } catch(err) {
+            console.log('Oops, unable to copy');
+        }
+
+        // Remove the selections - NOTE: Should use
+        // removeRange(range) when it is supported
+        window.getSelection().removeAllRanges();
+    }
+</script>
+
+<div id='allcontent'>
+
+    <h1>SayTeX</h1>
+
+    <div id="editorcontrolpanel">
+        <button id="startButton" disabled>Start</button>
+        <div id="editorcontextualstatusdiv">
+
+            <a style="display:none;" id="stopButton">Stop</a>
+            <span style="display:none;" id="editorcontextualstatusmessage">Finished.</span>
+            <span id="editorcontextualstatusplaceholder">Meh.</span>
+        
+        </div>
+    </div>
+
+    <p id="displaylatex">
+    $$a^2+b^2=c^2$$
+    </p>
+
+    <code id="rawlatex" class="raw_latex">
+    $a^2+b^2=c^2$
+    </code>
+
+    <p id="currrrtext" style="display:none;">
+    </p>
+    <br>
+
+    <button id="copybutton" onclick="copyToClipboard('.raw_latex')">Copy</button>
+
+
+
+
+
+
 </div>
+
 
 <!-- SDK reference goes here -->
 <script src="{{ url_for('static', filename='microsoft.cognitiveservices.speech.sdk.bundle.js') }}"></script>
@@ -44,37 +98,33 @@
 <!-- Speech SDK USAGE -->
 <script>
     // status fields and start button in UI
-    var phraseDiv;
-    var startRecognizeOnceAsyncButton;
+    var rawLatexField;
+    var displayLatexField;
+    var startButton;
 
-    // subscription key and region key for speech services.
-    var subscriptionKey, regionKey;
-    var authorizationToken;
+    // region key and authorization token for speech services
+    var regionKey = '{{ microsoft_region_key }}';
+    var authorizationToken = '{{ microsoft_authorization_token }}';
     var SpeechSDK;
     var recognizer;
+
 
     document.addEventListener("DOMContentLoaded", function () {
         startButton = document.getElementById("startButton");
         stopButton = document.getElementById("stopButton");
-        subscriptionKey = document.getElementById("subscriptionKey");
-        regionKey = document.getElementById("regionKey");
-        phraseDiv = document.getElementById("phraseDiv");
+        rawLatexField = document.getElementById("rawlatex");
+        displayLatexField = document.getElementById("displaylatex");
 
         startButton.addEventListener("click", function () {
 
 
-            phraseDiv.innerHTML = "";
 
-            // if we got an authorization token, use the token. Otherwise use the provided subscription key
+            // if we got an authorization token, use the token. otherwise error
             var speechConfig;
             if (authorizationToken) {
-                speechConfig = SpeechSDK.SpeechConfig.fromAuthorizationToken(authorizationToken, regionKey.value);
+                speechConfig = SpeechSDK.SpeechConfig.fromAuthorizationToken(authorizationToken, regionKey);
             } else {
-                if (subscriptionKey.value === "" || subscriptionKey.value === "subscription") {
-                    alert("Please enter your Microsoft Cognitive Services Speech subscription key!");
-                    return;
-                }
-                speechConfig = SpeechSDK.SpeechConfig.fromSubscription(subscriptionKey.value, regionKey.value);
+                console.error('No authorization token obtained. Something wrong.');
             }
 
             speechConfig.speechRecognitionLanguage = "en-US";
@@ -84,7 +134,26 @@
             
             recognizer.recognizing = function (r, ev) {
                 console.log('recognizing!');
-                phraseDiv.innerHTML = ev.result.text;
+
+                text = ev.result.text;
+                console.log(text);
+
+                fetch('{{ api_url }}'  + '/' + encodeURIComponent(text))
+                    .then(function(response) {
+                        return response.text();
+                    })
+                    .then(function(mytext) {
+                        console.log(mytext)
+
+                        if(mytext==' '){
+                                return
+                        }
+                        rawLatexField.innerHTML = "$" + mytext + "$";
+                        document.getElementById("currrrtext").innerHTML = text;
+
+                        displayLatexField.innerHTML = "$$" + mytext + "$$";
+                        MathJax.Hub.Queue(["Typeset",MathJax.Hub,"displaylatex"]);
+                    });
             };
 
 
@@ -96,15 +165,21 @@
 
                 //recognizer.close();
                 //recognizer = undefined;
+                startButton.innerHTML = "Listening...";
+                startButton.className = "editorrunbuttonrunning";
                 startButton.disabled = true;
                 stopButton.disabled = false;
-                phraseDiv.innerHTML = '';
+                stopButton.style.display = "inline";
+                document.getElementById("editorcontextualstatusplaceholder").style.display = "none";
                 console.log('starting continuous speech recognition');
             },
             function (err) {
                 startButton.disabled = false;
+                startButton.innerHTML = "Start";
+                startButton.className = "";
                 stopButton.disabled = true;
-                phraseDiv.innerHTML += err;
+                stopButton.style.display = "none";
+                document.getElementById("editorcontextualstatusplaceholder").style.display = "inline";
                 window.console.log(err);
 
                 recognizer.close();
@@ -113,7 +188,11 @@
         });
         stopButton.addEventListener("click", function () {
             startButton.disabled = false;
+            startButton.innerHTML = "Start";
+            startButton.className = "";
             stopButton.disabled = true;
+            stopButton.style.display = "none";
+            document.getElementById("editorcontextualstatusplaceholder").style.display = "inline";
 
             recognizer.stopContinuousRecognitionAsync(
                 function(result) {
@@ -129,13 +208,6 @@
             SpeechSDK = window.SpeechSDK;
             startButton.disabled = false;
 
-            document.getElementById('content').style.display = 'block';
-            document.getElementById('warning').style.display = 'none';
-
-            // in case we have a function for getting an authorization token, call it.
-            if (typeof RequestAuthorizationToken === "function") {
-              RequestAuthorizationToken();
-            }
         }
     });
 </script>

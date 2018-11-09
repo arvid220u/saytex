@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import requests
+
 from flask import *
 app = Flask(__name__)
 app.config["PREFERRED_URL_SCHEME"] = "https"
@@ -9,7 +11,21 @@ import config
 
 @app.route("/")
 def index():
-    return render_template('index.html',    microsoft_speech_api_key = config.MICROSOFT_SPEECH_API_KEY, 
+    return render_template('index.html',    microsoft_authorization_token = get_microsoft_authorization_token(), 
                                             microsoft_region_key = config.MICROSOFT_REGION_KEY, 
-                                            api_url = config.API_URL
-                                        )
+                                            api_url = config.API_URL,
+                                            css_filename  = config.CSS_FILENAME
+    )
+
+
+
+
+def get_microsoft_authorization_token():
+    # get a microsoft authorization token
+    
+    tokenurl = 'https://' + config.MICROSOFT_REGION_KEY + '.api.cognitive.microsoft.com/sts/v1.0/issuetoken'
+    headers = {'Content-Type': 'application/json', 'Ocp-Apim-Subscription-Key': config.MICROSOFT_SPEECH_API_KEY}
+
+    result = requests.post(tokenurl, headers=headers)
+
+    return result.text
