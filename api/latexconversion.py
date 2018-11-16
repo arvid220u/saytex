@@ -21,16 +21,6 @@ math_symbols = [
         ('equals','='),
         ('squared','^2'),
         ('cubed','^3'),
-        ('zero','0'),
-        ('one','1'),
-        ('two','2'),
-        ('three','3'),
-        ('four','4'),
-        ('five','5'),
-        ('six','6'),
-        ('seven','7'),
-        ('eight','8'),
-        ('nine','9'),
         ('greater than','>'),
         ('less than','<'),
         ('< or equal to','<='),
@@ -59,31 +49,22 @@ common_mischaracterizations = [
         ('eclipse','a plus'),
         ('aid','a'),
         ('beat','b'),
+        ('nfinity','infinity'),
 ]
 
 # not used for wolfram alpha, but used for fast API
 math_symbols_aggressive = [
         ('by', '*'),
-        ('alpha','\\alpha'),
-        ('beta','\\beta'),
-        ('gamma','\\gamma'),
-        ('zeta','\\zeta'),
-        ('eta','\\eta'),
-        ('theta','\\theta'),
-        ('iota','\\iota'),
-        ('kappa','\\kappa'),
-        ('lambda','\\lambda'),
-        ('mu','\\mu'),
-        ('nu','\\nu'),
-        ('xi','\\xi'),
-        ('pi','\\pi'),
-        ('rho','\\rho'),
-        ('tau','\\tau'),
-        ('upsilon','\\upsilon'),
-        ('phi','\\phi'),
-        ('chi','\\chi'),
-        ('psi','\\psi'),
-        ('omega','\\omega'),
+        ('zero','0'),
+        ('one','1'),
+        ('two','2'),
+        ('three','3'),
+        ('four','4'),
+        ('five','5'),
+        ('six','6'),
+        ('seven','7'),
+        ('eight','8'),
+        ('nine','9'),
 ]
 
 # not used for wolfram alpha, but used for fast API
@@ -103,21 +84,50 @@ common_mischaracterizations_aggressive = [
         ('equal to','equals'),
         ('for all','forall'),
         ('frale','forall'),
+        ('integrate','integral'),
 ]
 
-# used for all APIs
-uppercase_to_lowercase = [(x,x.lower()) for x in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ']
-
+class WolframError(Exception):
+    pass
 
 def wolframlatex(text):
-    text=text.lower().replace('some', 'sum')
-    print(text)
-    text=replace_symbols(text)
-    print(text)
-    
+    """
+    convert text to latex using wolfram API
 
-    r = requests.get('https://www.wolframcloud.com/objects/arvid/latexdictation/stringtolatex?x=' + urllib.parse.quote_plus(text))
-    return r.text
+    parameters:
+        text: unprocessed spoken string
+
+    returns:
+        latex string
+    """
+    preprocessed = preprocess(text)
+
+    print(preprocessed)
+
+    r = requests.get('https://www.wolframcloud.com/objects/arvid/latexdictation/stringtolatex?x=' + urllib.parse.quote_plus(preprocessed))
+    latex = r.text
+
+    print(latex)
+
+    # clean up the result
+    latex = latex.strip('"')
+
+    # replace escaped backslashes with real ones
+    latex = latex.replace('\\\\', '\\')
+
+    # remove starting and ending brackets
+    #latex = latex.lstrip('\\[').rstrip('\\]')
+    if latex.startswith('\\['):
+        latex = latex[2:]
+    if latex.endswith('\\]'):
+        latex = latex[:-2]
+    latex = latex.lstrip('[').rstrip(']')
+    
+    if '$Failed' in latex:
+        raise WolframError
+
+    return latex
+
 
 
 def simplelatex(text):
@@ -131,8 +141,11 @@ def simplelatex(text):
         latex string
     """
 
+    # aggressively preprocess
+    preprocessed = aggressive_preprocess(text)
+
     # preprocess string
-    preprocessed = preprocess(text)
+    preprocessed = preprocess(preprocessed)
 
     # aggressively preprocess
     preprocessed = aggressive_preprocess(preprocessed)
@@ -142,6 +155,7 @@ def simplelatex(text):
 
     # determine if latex is well-formed latex
     # huh
+    # could check for occurrence of long word, for example
 
     return latex
 
@@ -153,6 +167,13 @@ def replacelist(s, l):
     for replacetuple in l:
         s = s.replace(makeword(replacetuple[0]), makeword(replacetuple[1]))
     return s
+
+def transformcapitals(text):
+    # for every string capital letter, replace with Letter
+    # include greek letters!
+    return re.sub('capital (\D)', x : return x.group(1).upper(), text)
+
+
 
 def preprocess(text):
     """
@@ -167,9 +188,18 @@ def preprocess(text):
     """
     # replace symbols!
     # order: mischaracterizations, uppercase to lowercase, vocabulary, math symbols
-    processedtext = makeword(text)
+
+    # convert from lowercase to uppercase
+    processedtext = text.lower()
+
+    # make word, to add padding and make edge cases into non-edge cases
+    processedtext = makeword(processedtext)
+
+    # turn capital [letter] into [Letter]
+    processedtext = transformcapitals(processedtext)
+
+    # replace various things
     processedtext = replacelist(processedtext, common_mischaracterizations)
-    processedtext = replacelist(processedtext, uppercase_to_lowercase)
     processedtext = replacelist(processedtext, special_vocabulary)
     processedtext = replacelist(processedtext, math_symbols)
     
@@ -179,6 +209,7 @@ def aggressive_preprocess(text):
     """
     used together with preprocess
     used for the simplelatex conversion
+    produces a string that is NOT tailored to latex
 
     parameters:
         text: preprocessed string of spoken math

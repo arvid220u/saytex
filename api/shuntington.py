@@ -1,5 +1,28 @@
 import re
 
+latexsymbols = [
+    ('alpha','\\alpha'),
+    ('beta','\\beta'),
+    ('gamma','\\gamma'),
+    ('zeta','\\zeta'),
+    ('eta','\\eta'),
+    ('theta','\\theta'),
+    ('iota','\\iota'),
+    ('kappa','\\kappa'),
+    ('lambda','\\lambda'),
+    ('mu','\\mu'),
+    ('nu','\\nu'),
+    ('xi','\\xi'),
+    ('pi','\\pi'),
+    ('rho','\\rho'),
+    ('tau','\\tau'),
+    ('upsilon','\\upsilon'),
+    ('phi','\\phi'),
+    ('chi','\\chi'),
+    ('psi','\\psi'),
+    ('omega','\\omega'),
+]
+
 def is_number(str):
     operators=['+', '-', '*', '/', '(', ')','=','^']
     return str not in operators
