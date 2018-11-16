@@ -15,7 +15,21 @@ import latexconversion
 @app.route("/full/<string:text>")
 @crossdomain(origin='*')
 def fullapi(text):
-    return latexconversion.wolframlatex(text)
+    """
+    converts string to latex using wolfram API
+    if an error is returned, the fastapi is used as a fallback
+
+    parameters:
+        text: the spoken string to be converted into latex code
+
+    returns:
+        latex code
+    """
+    try:
+        latex = latexconversion.wolframlatex(text)
+    except:
+        latex = latexconversion.simplelatex(text)
+    return latex
 
 
 
