@@ -1,6 +1,7 @@
 
 import requests
 import urllib
+import re
 
 from shuntington import evaluate
 from shuntington import lineareval
