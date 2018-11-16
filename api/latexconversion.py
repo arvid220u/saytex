@@ -171,7 +171,7 @@ def replacelist(s, l):
 def transformcapitals(text):
     # for every string capital letter, replace with Letter
     # include greek letters!
-    return re.sub('capital (\D)', x : return x.group(1).upper(), text)
+    return re.sub('capital (\D)', lambda x : x.group(1).upper(), text)
 
 
 
