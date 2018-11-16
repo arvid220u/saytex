@@ -78,7 +78,7 @@
     $a^2+b^2=c^2$
     </code>
 
-    <p id="currrrtext" style="display:none;">
+    <p id="curtext" style="display:none;">
     </p>
     <br>
 
@@ -101,6 +101,8 @@
     var rawLatexField;
     var displayLatexField;
     var startButton;
+    var curtext = "";
+    var ncurtext = "";
 
     // region key and authorization token for speech services
     var regionKey = '{{ microsoft_region_key }}';
@@ -117,6 +119,7 @@
 
         startButton.addEventListener("click", function () {
 
+            curtext = '';
 
 
             // if we got an authorization token, use the token. otherwise error
@@ -138,7 +141,10 @@
                 text = ev.result.text;
                 console.log(text);
 
-                fetch('{{ api_url }}'  + '/' + encodeURIComponent(text))
+                text = curtext + text;
+                ncurtext = text;
+
+                fetch('{{ api_url }}'  + '/fast/' + encodeURIComponent(text))
                     .then(function(response) {
                         return response.text();
                     })
@@ -149,11 +155,21 @@
                                 return
                         }
                         rawLatexField.innerHTML = "$" + mytext + "$";
-                        document.getElementById("currrrtext").innerHTML = text;
 
                         displayLatexField.innerHTML = "$$" + mytext + "$$";
                         MathJax.Hub.Queue(["Typeset",MathJax.Hub,"displaylatex"]);
                     });
+            };
+            recognizer.recognized = function (r, ev) {
+                console.log('recognized!');
+                //curtext += ev.result.text;
+                // don't use recognized event because it tries to make sentences with grammar which is often really bad
+                curtext = ncurtext;
+                /*if (curtext.endsWith('.')) {
+                    curtext = curtext.slice(0, -1);
+                }*/
+                curtext += ' ';
+                console.log(curtext);
             };
 
 
@@ -197,6 +213,21 @@
             recognizer.stopContinuousRecognitionAsync(
                 function(result) {
                     console.log('stopping continuous speech recognition');
+                    if (false) {
+                        fetch('{{ api_url }}'  + '/full/' + encodeURIComponent(curtext))
+                        .then(function(response) {
+                            return response.text();
+                        })
+                        .then(function(mytext) {
+                            console.log(mytext)
+
+                            rawLatexField.innerHTML = "$" + mytext + "$";
+
+                            displayLatexField.innerHTML = "$$" + mytext + "$$";
+                            MathJax.Hub.Queue(["Typeset",MathJax.Hub,"displaylatex"]);
+                        });
+                    }
+                    
                 },
                 function (err) {
                     console.log(err);
