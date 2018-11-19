@@ -3,8 +3,7 @@ import requests
 import urllib
 import re
 
-from shuntington import evaluate
-from shuntington import lineareval
+import latexengine
 
 # used in all APIs
 special_vocabulary = [
@@ -152,7 +151,7 @@ def simplelatex(text):
     preprocessed = aggressive_preprocess(preprocessed)
 
     # do the lineareval
-    latex = lineareval(preprocessed)
+    latex = latexengine.runengine(preprocessed)
 
     # determine if latex is well-formed latex
     # huh
