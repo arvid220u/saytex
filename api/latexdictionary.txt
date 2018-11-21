@@ -1,3 +1,4 @@
+SECTION: greekletters
 alpha, \alpha
 beta, \beta
 gamma, \gamma

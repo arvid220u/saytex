@@ -1,20 +1,44 @@
 import re
 
-latexdictionary = 'latexdictionary.txt'
+latexdictionaryfile = 'latexdictionary.txt'
+latexdictionary = None
+def get_latexdictionary():
+    global latexdictionary
+    global latexdictionaryfile
+    if latexdictionary is not None:
+        return latexdictionary
+    latexdictionary = {}
+    with open(latexdictionaryfile, 'r') as df:
+        section = []
+        sectionname = ""
+        for l in df:
+            if l.startswith("SECTION"):
+                if len(section) > 0:
+                    latexdictionary[sectionname] = section
+                section = []
+                sectionname = l.split()[1]
+                continue
+            t = [x.strip() for x in l.split(',')]
+            section.append((t[0],t[1]))
+        if len(section) > 0:
+            latexdictionary[sectionname] = section
+    return latexdictionary
+
+
 
 def convert_dictionary(s):
     s = makeword(s)
     conversions = []
-    with open(latexdictionary, 'r') as df:
-        for l in df:
-            t = [x.strip() for x in l.split(',')]
-            conversions.append((t[0],t[1]))
+    for section in get_latexdictionary():
+        conversions += get_latexdictionary()[section]
     print(conversions)
     for replacetuple in conversions:
         s = s.replace(makeword(replacetuple[0]), makeword(replacetuple[1]))
     return s.strip()
 def makeword(s):
     return ' ' + s + ' '
+def makeregexword(s):
+    return r'\b' + s + r'\b'
 
 def parse_spoken_numbers(s):
     """
@@ -84,8 +108,9 @@ def parse_spoken_numbers(s):
                     dnm += x
                 news += " " + str(dnm)
                 innumber = False
-            else:
-                news += " " + word
+                curnumber = []
+
+            news += " " + word
 
     if innumber:
         dnm = 0
@@ -97,6 +122,28 @@ def parse_spoken_numbers(s):
     return news
 
 
+
+def find_subscripts(s):
+    """
+    Find subscripts and replace them.
+
+    A single letter followed by a number is defined as a subscript.
+
+    Also, the word sub is always replaced by a subscript.
+
+    Note that greek letters should also be considered as letters.
+    """
+
+    #regular letters
+    s = re.sub(r'(\b[a-zA-z]) ([0-9]+)', r'\1_\2', s)
+    
+    greek_letters = [x[0] for x in get_latexdictionary()['greekletters']]
+
+    s = re.sub(r'\b(' + '|'.join(greek_letters) + ') ([0-9]+)', r'\1_\2', s)
+
+    s = re.sub(r' sub ', r'_', s)
+
+    return s
             
 
 
@@ -112,10 +159,16 @@ def runengine(s):
     returns:
         latex str
     """
+    s = makeword(s)
     s = convert_dictionary(s)
+    print(s)
+    s = parse_spoken_numbers(s)
+    print(s)
+    s = find_subscripts(s)
+    print(s)
     s = lineareval(s)
 
-    return s
+    return s.strip()
     
 
 def is_number(s):
@@ -130,7 +183,7 @@ def is_number(s):
     '''
  
 def is_name(str):
-    return re.match("\w+", str)
+    return re.match(r"\w+", str)
  
 def peek(stack):
     return stack[-1] if stack else None
@@ -151,7 +204,7 @@ def greater_precedence(op1, op2):
     return precedences[op1] > precedences[op2]
  
 def evaluate(expression):
-    tokens = re.findall("[\^+/*=()-]|\w+", expression)
+    tokens = re.findall(r"[\^+/*=()-]|\w+", expression)
     print(tokens)
     values = []
     operators = []

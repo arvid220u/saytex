@@ -55,16 +55,6 @@ common_mischaracterizations = [
 # not used for wolfram alpha, but used for fast API
 math_symbols_aggressive = [
         ('by', '*'),
-        ('zero','0'),
-        ('one','1'),
-        ('two','2'),
-        ('three','3'),
-        ('four','4'),
-        ('five','5'),
-        ('six','6'),
-        ('seven','7'),
-        ('eight','8'),
-        ('nine','9'),
 ]
 
 # not used for wolfram alpha, but used for fast API
@@ -72,7 +62,6 @@ common_mischaracterizations_aggressive = [
         ('is',' '),
         ('the',' '),
         ('of',' '),
-        ('and','n'),
         ('sign','sine'),
         ('such that','then'),
         ('we get','then'),
@@ -171,7 +160,7 @@ def replacelist(s, l):
 def transformcapitals(text):
     # for every string capital letter, replace with Letter
     # include greek letters!
-    return re.sub('capital (\D)', lambda x : x.group(1).upper(), text)
+    return re.sub(r'capital (\D)', lambda x : x.group(1).upper(), text)
 
 
 
