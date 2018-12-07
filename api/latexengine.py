@@ -1,5 +1,19 @@
 import re
 
+
+# constants
+from enum import Enum
+class Mathwords(Enum):
+    INTEGRAL = 'integral'
+    SUM = 'sum'
+
+class Controlwords(Enum):
+    FROM = 'FROMFROMFROM'
+    ENDFROM = 'ENDFROMFROMFROM'
+    TO = 'TOTOTO'
+    ENDTO = 'ENDTOTOTO'
+
+
 latexdictionaryfile = 'latexdictionary.txt'
 latexdictionary = None
 def get_latexdictionary():
@@ -39,6 +53,9 @@ def makeword(s):
     return ' ' + s + ' '
 def makeregexword(s):
     return r'\b' + s + r'\b'
+
+
+
 
 def parse_spoken_numbers(s):
     """
@@ -148,6 +165,116 @@ def find_subscripts(s):
 
 
 
+def symbolify_fromtos(s):
+    """
+    Replaces all from-to-sequences using symbolify_fromto.
+    """
+    ns = s
+    while True:
+        try:
+            ns = symbolify_fromto(ns)
+        except NoFromTo:
+            break
+    return ns
+
+class NoFromTo(Exception):
+    pass
+
+def symbolify_fromto(s):
+    """
+    Finds a from-to-sequence and its corresponding sum or integral.
+    Then concatenates the symbol so as to make it easier to parse.
+
+    We assume that everything between the words "from" and "to" is
+    the from part. We assume that the first simple expression after
+    "to" is the to part. Simple expression is defined as at most two
+    variables and one operation. If parantheses, it uses that.
+
+    In the case where there is no matching "to" word for a "from" word,
+    we assume that the entirety of the rest of the string is the from part.
+
+    The return string is formatted as sum FROMFROMFROM expression1 ENDFROMFROMFROM TOTOTO expression2 ENDTOTOTO.
+    ('sum' can be substituted for 'integral'.)
+    """
+    s = makeword(s)
+    fromindex = s.find(makeword("from")) + 1
+    if fromindex == 0:
+        raise NoFromTo
+    fromindexend = fromindex + len("from")
+
+    toindex = s[fromindex:].find(makeword("to")) + 1 + fromindex
+    if toindex == -1 + 1 + fromindex:
+        # no match, set end of string as toindex
+        toindex = len(s)
+    toindexend = toindex + len("to")
+
+    # determine the endtoindex
+    # do this using the following strategy:
+    # - if it starts with '(' then find matching ')'
+    # otherwise just assume only the next word is part of it
+    # except: +, !, ^x (not - because consider sum from 0 to n of minus 1 to the i)
+    endtoindex = toindexend
+    while endtoindex < len(s):
+        tostring = s[endtoindex:]
+        tostring = tostring.strip()
+        if tostring[0] == '(':
+            # find matching
+            endparantheses = findmatching(tostring,0)
+            if endparantheses > len(tostring):
+                # we don't care if the parantheses are matched
+                endparantheses = endparantheses - 1
+            endtoindex = endparantheses + 1
+            break
+        else:
+            tostringwords = tostring.split()
+            if len(tostringwords) > 2:
+                if tostringwords[1] == '+':
+                    # think about this before changing! remember the continue, which makes sure that everything is included
+                    # this is smart code
+                    endtoindex = s[endtoindex:].find('+') + endtoindex + 1
+                    continue
+            if len(tostringwords) > 1:
+                if tostringwords[1] == '!':
+                    endtoindex = s[endtoindex:].find('!') + 1 + endtoindex
+                    break
+                if tostringwords[1] == '^':
+                    # think about this before changing! remember the continue, which makes sure that everything is included
+                    # this is smart code
+                    endtoindex = s[endtoindex:].find('^') + endtoindex + 1
+                    continue
+                if tostringwords[1].startswith('^'):
+                    endtoindex = s[endtoindex:].find(tostringwords[1]) + len(tostringwords[1]) + endtoindex
+                    break
+            endtoindex = s[endtoindex:].find(tostringwords[0]) + len(tostringwords[0]) + endtoindex
+            break
+
+    
+    # find the closest sum or integral before
+    closestsumindex = s[:fromindex].rfind(makeword(Mathwords.SUM.value)) + 1
+    closestintegralindex = s[:fromindex].rfind(makeword(Mathwords.INTEGRAL.value)) + 1
+
+    closestindex = closestsumindex
+    closestindexend = closestindex + len(Mathwords.SUM.value)
+    if closestintegralindex > closestsumindex:
+        closestindex = closestintegralindex
+        closestindexend = closestindex + len(Mathwords.INTEGRAL.value)
+
+    if closestindex == -1:
+        raise NoFromTo
+
+
+    newstring = s[:closestindexend] + makeword(Controlwords.FROM.value) + s[fromindexend:toindex] + makeword(Controlwords.ENDFROM.value)
+    endstring = s[closestindexend:fromindex]
+    if toindexend <= len(s):
+        newstring += makeword(Controlwords.TO.value) + s[toindexend:endtoindex] + makeword(Controlwords.ENDTO.value)
+        endstring += " " + s[endtoindex:]
+
+    newstring = newstring + endstring
+
+    return newstring
+    
+    
+
 
 def runengine(s):
     """
@@ -165,6 +292,8 @@ def runengine(s):
     s = parse_spoken_numbers(s)
     print(s)
     s = find_subscripts(s)
+    print(s)
+    s = symbolify_fromtos(s)
     print(s)
     s = lineareval(s)
 
@@ -234,15 +363,28 @@ def evaluate(expression):
 
 
 
-def findmatching(xp,pos):
-    count=1
-    ps = pos+1
-    while count > 0 and ps < len(xp):
-        if xp[ps]=='(':
+def findmatching(s,pos):
+    """
+    Find matching parantheses.
+
+    params:
+        s: string, to be searched in
+        pos: int, position of ( we want to find a match for
+
+    returns:
+        int, position of matching ) bracket
+        - if there is no match, return len(s)
+    """
+    count = 1
+    ps = pos + 1
+    while count > 0 and ps < len(s):
+        if s[ps]=='(':
             count+=1
-        if xp[ps]==')':
+        if s[ps]==')':
             count-=1
-        ps +=1
+        if count == 0:
+            break
+        ps += 1
     
     return ps
 
@@ -262,7 +404,10 @@ def lineareval(expression,preans='',prelast='',curx=0):
         addl=True
         pos += len(token)
         if token=="(":
-            mmm = findmatching(expression,pos-1)
+            mmm = findmatching(expression,pos-1)+1
+            if mmm > len(expression):
+                # if there is no matching parantheses, we don't really care
+                mmm -= 1
             print('mmm: ' + str(mmm))
             if addl:
                 ans+=last
@@ -299,8 +444,18 @@ def lineareval(expression,preans='',prelast='',curx=0):
             dis='\infty '
         if token=='then':
             dis='.\:'
-        if token=='integral':
-            dis='\int '
+        if token==Mathwords.INTEGRAL.value:
+            dis='\\int '
+        if token==Mathwords.SUM.value:
+            dis='\\sum '
+        if token==Controlwords.FROM.value:
+            dis='_{'
+        if token==Controlwords.ENDFROM.value:
+            dis='}'
+        if token==Controlwords.TO.value:
+            dis='^{'
+        if token==Controlwords.ENDTO.value:
+            dis='}'
         if token=='/':
             dis='\\frac{'+last+'}{'
             addl=False
@@ -313,8 +468,6 @@ def lineareval(expression,preans='',prelast='',curx=0):
             dis='\\sin '
         if token=='tan':
             dis='\\tan '
-        if token=='sum':
-            dis='\\sum '
         if token=='in':
             dis='\\in '
         if addl:

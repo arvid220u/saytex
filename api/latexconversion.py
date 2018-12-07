@@ -15,8 +15,10 @@ special_vocabulary = [
 math_symbols = [
         ('plus', '+'),
         ('minus', '-'),
+        ('factorial', '!'),
         ('over', '/'),
         ('divided by', '/'),
+        ('to the power of', '^'),
         ('times', '*'),
         ('equals','='),
         ('squared','^2'),
@@ -154,7 +156,11 @@ def makeword(s):
     return ' ' + s + ' '
 def replacelist(s, l):
     for replacetuple in l:
-        s = s.replace(makeword(replacetuple[0]), makeword(replacetuple[1]))
+        nreptup = (makeword(replacetuple[0]), makeword(replacetuple[1]))
+        if replacetuple[0][0] == ' ':
+            # if replace begins with space, then we also want to replace the space
+            nreptup = (nreptup[0][1:], nreptup[1][1:])
+        s = s.replace(nreptup[0], nreptup[1])
     return s
 
 def transformcapitals(text):
