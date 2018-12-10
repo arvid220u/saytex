@@ -58,7 +58,7 @@
         $$a^2+b^2=c^2$$
         </p>
 
-        <code class="rawlatex">
+        <code class="rawlatex" contenteditable='true' spellcheck="false">
         $a^2+b^2=c^2$
         </code>
 
@@ -79,7 +79,7 @@
         $$a^2+b^2=c^2$$
         </p>
 
-        <code class="rawlatex">
+        <code class="rawlatex" contenteditable='true' spellcheck="false">
         $a^2+b^2=c^2$
         </code>
 
@@ -159,6 +159,11 @@
         });
     }
 
+    function rawLatexChange(rawfield, displayfield) {
+        displayfield.innerHTML = '$' + rawfield.innerHTML.trim() + '$';
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+
 
     document.addEventListener("DOMContentLoaded", function () {
         startButton = document.getElementById("startButton");
@@ -167,6 +172,15 @@
         fastDisplayLatexField = document.querySelector("#fastapi .displaylatex");
         fullRawLatexField = document.querySelector("#fullapi .rawlatex");
         fullDisplayLatexField = document.querySelector("#fullapi .displaylatex") ;
+
+
+        fastRawLatexField.addEventListener('input', function() {
+            rawLatexChange(fastRawLatexField,fastDisplayLatexField);
+        });
+        fullRawLatexField.addEventListener('input', function() {
+            rawLatexChange(fullRawLatexField,fullDisplayLatexField);
+        });
+
 
         startButton.addEventListener("click", function () {
 
@@ -272,6 +286,8 @@
 
         }
     });
+
+
 </script>
 
 
