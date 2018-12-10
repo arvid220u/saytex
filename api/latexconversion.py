@@ -1,4 +1,4 @@
-
+import logging
 import requests
 import urllib
 import re
@@ -91,14 +91,17 @@ def wolframlatex(text):
     returns:
         latex string
     """
+
+    logging.info("start wolframlatex")
+
     preprocessed = preprocess(text)
 
-    print(preprocessed)
+    logging.debug(preprocessed)
 
     r = requests.get('https://www.wolframcloud.com/objects/arvid/latexdictation/stringtolatex?x=' + urllib.parse.quote_plus(preprocessed))
     latex = r.text
 
-    print(latex)
+    logging.debug(latex)
 
     # clean up the result
     latex = latex.strip('"')

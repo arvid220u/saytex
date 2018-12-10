@@ -45,7 +45,6 @@ def convert_dictionary(s):
     conversions = []
     for section in get_latexdictionary():
         conversions += get_latexdictionary()[section]
-    print(conversions)
     for replacetuple in conversions:
         s = s.replace(makeword(replacetuple[0]), makeword(replacetuple[1]))
     return s.strip()
