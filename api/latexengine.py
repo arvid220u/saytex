@@ -1,4 +1,6 @@
 import re
+import math
+import logging
 
 
 # constants
@@ -94,6 +96,12 @@ def parse_spoken_numbers(s):
     for npart in ns:
         nsdict[str(npart)] = npart
 
+    
+    def numbertype(x):
+        if x == 0:
+            return 0
+        return int(math.log10(x))
+
     # now iterate through the string linearly!
     innumber = False
     news = ""
@@ -107,6 +115,15 @@ def parse_spoken_numbers(s):
             if len(curnumber) == 0:
                 curnumber.append(b.v)
             else:
+                # if curnumber has exact same value (log 10) as curnumber last one, then terminate this number and start a new one
+                if numbertype(b.v) == numbertype(curnumber[-1]):
+                    dnm = 0
+                    for x in curnumber:
+                        dnm += x
+                    news += " " + str(dnm)
+                    curnumber = [b.v]
+                    continue
+
                 if curnumber[-1] > b.v:
                     curnumber.append(b.v)
                 else:
@@ -201,11 +218,40 @@ def symbolify_fromto(s):
         raise NoFromTo
     fromindexend = fromindex + len("from")
 
+    # note, the +1 comes from the makeword
     toindex = s[fromindex:].find(makeword("to")) + 1 + fromindex
     if toindex == -1 + 1 + fromindex:
         # no match, set end of string as toindex
         toindex = len(s)
+
     toindexend = toindex + len("to")
+
+    # if there is a 'from' between the fromindexend and the toindex,
+    # or if the toindex is the len(s)
+    # then check if the closest 2 was misheard
+    if toindex == len(s) or 'from' in s[fromindexend:toindex]:
+        # note, the +1 comes from the makeword
+        twoindex = s[fromindex:].find(makeword("2")) + 1 + fromindex
+        if twoindex != -1 + 1 + fromindex:
+            if twoindex < toindex:
+                oldtoindex = toindex
+
+                # update the toindex
+                toindex = twoindex
+                toindexend = toindex + len('2')
+
+                # special case: if the from string becomes empty now, or ends with an equal sign,
+                # interpret it as a 2 still, and try to find the next 2
+                newfromstring = s[fromindexend:twoindex].strip()
+                if newfromstring == '' or newfromstring[-1] == '=':
+                    # try to find next 2
+                    nexttwoindex = s[twoindex+1:].find(makeword("2")) + 1 + (twoindex+1)
+                    if nexttwoindex != -1 + 1 + (twoindex+1) and nexttwoindex < oldtoindex:
+                        # use it!
+                        toindex = nexttwoindex
+                        toindexend = nexttwoindex + len("2")
+                    
+
 
     # determine the endtoindex
     # do this using the following strategy:
@@ -285,16 +331,18 @@ def runengine(s):
     returns:
         latex str
     """
+    logging.info("runengine. initial: " + s)
     s = makeword(s)
     s = convert_dictionary(s)
-    print(s)
+    logging.info("runengine: after convert_dictionary: " + s)
     s = parse_spoken_numbers(s)
-    print(s)
+    logging.info("runengine: after parse_spoken_numbers: " + s)
     s = find_subscripts(s)
-    print(s)
+    logging.info("runengine: after find_subscripts: " + s)
     s = symbolify_fromtos(s)
-    print(s)
+    logging.info("runengine: after symbolify_fromtos: " + s)
     s = lineareval(s)
+    logging.info("runengine: after lineareval: " + s)
 
     return s.strip()
     
