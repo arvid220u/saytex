@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 from flask import *
 app = Flask(__name__)
 app.config["PREFERRED_URL_SCHEME"] = "https"
@@ -9,6 +10,15 @@ from crossdomain import crossdomain
 from flask import Response
 
 import latexconversion
+
+import re
+
+
+
+@app.before_first_request
+def logging_init():
+    import logging
+    logging.basicConfig(level=logging.DEBUG)
 
 
 
@@ -25,11 +35,29 @@ def fullapi(text):
     returns:
         latex code
     """
-    try:
-        latex = latexconversion.wolframlatex(text)
-    except:
-        latex = latexconversion.simplelatex(text)
-    return latex
+
+    # split the text at equals
+    # maybe introduce caching here at some point, so that all wolfram expressions don't need to be re-evaluated?
+    # smart splitting needs to be done. for example, if the equals sign is after a 'from' then don't split
+
+    expressions = filter(None, re.split(r'(?<!from [^\s] )(equals|is equal to)', text))
+    
+    finallatex = ""
+
+    for expression in expressions:
+        
+        try:
+            latex = latexconversion.wolframlatex(expression)
+        except:
+            latex = latexconversion.simplelatex(expression)
+
+        if finallatex != "":
+            finallatex += " = "
+
+        finallatex += latex
+
+
+    return finallatex
 
 
 
