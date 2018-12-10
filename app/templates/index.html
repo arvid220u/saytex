@@ -10,29 +10,6 @@
 <body>
 
 <script>
-    // copy button script
-    /*var copyButton = document.querySelector('.copybutton');
-    copyButton.addEventListener('click', function(event) {
-        // Select the copy anchor text
-        var emailLink = document.querySelector('.copytext');
-        var range = document.createRange();
-        range.selectNode(emailLink);
-        window.getSelection().addRange(range);
-
-        try {
-            // Now that we've selected the anchor text, execute the copy command
-            var successful = document.execCommand('copy');
-            var msg = successful ? 'successful' : 'unsuccessful';
-            console.log('Copy email command was ' + msg);
-        } catch(err) {
-            console.log('Oops, unable to copy');
-        }
-
-        // Remove the selections - NOTE: Should use
-        // removeRange(range) when it is supported
-        window.getSelection().removeAllRanges();
-    });*/
-
     function copyToClipboard(copy_from_class) {
         // Select the copy anchor text
         var emailLink = document.querySelector(copy_from_class);
@@ -70,21 +47,54 @@
         </div>
     </div>
 
-    <p id="displaylatex">
-    $$a^2+b^2=c^2$$
-    </p>
+    <hr>
 
-    <code id="rawlatex" class="raw_latex">
-    $a^2+b^2=c^2$
-    </code>
+    <div id="fastapi" class='latexsection'>
+
+        <h6>SayTeX API</h6>
+
+        <p class="displaylatex">
+        $$a^2+b^2=c^2$$
+        </p>
+
+        <code class="rawlatex">
+        $a^2+b^2=c^2$
+        </code>
+
+        <div>
+            <button class="copybutton" onclick="copyToClipboard('#fastapi .rawlatex')">Copy</button>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div id="fullapi" class='latexsection'>
+
+
+        <h6>Wolfram Alpha API</h6>
+
+        <p class="displaylatex">
+        $$a^2+b^2=c^2$$
+        </p>
+
+        <code class="rawlatex">
+        $a^2+b^2=c^2$
+        </code>
+
+        <div>
+            <button class="copybutton" onclick="copyToClipboard('#fullapi .rawlatex')">Copy</button>
+        </div>
+
+    </div>
+
+    <hr>
+
+
 
     <p id="curtext" style="display:none;">
     </p>
     <br>
-
-    <button id="copybutton" onclick="copyToClipboard('.raw_latex')">Copy</button>
-
-
 
 
 
@@ -95,11 +105,12 @@
 <!-- SDK reference goes here -->
 <script src="{{ url_for('static', filename='microsoft.cognitiveservices.speech.sdk.bundle.js') }}"></script>
 
-<!-- Speech SDK USAGE -->
 <script>
     // status fields and start button in UI
-    var rawLatexField;
-    var displayLatexField;
+    var fastRawLatexField;
+    var fastDisplayLatexField;
+    var fullRawLatexField;
+    var fullDisplayLatexField;
     var startButton;
     var curtext = "";
     var ncurtext = "";
@@ -111,11 +122,50 @@
     var recognizer;
 
 
+    // An enum containing the URL paths for the Latex API
+    var LatexAPIURLs = {
+        FAST: '{{ api_url }}' + '/fast/',
+        FULL: '{{ api_url }}' + '/full/',
+    };
+    function callLatexAPI(apiurl, text, rawfield, displayfield) {
+        /*
+        Calls the LaTeX API.
+
+        params:
+            - apiurl:       str, a value of the enum LatexAPIURLs
+            - text:         str, to be sent to API (unencoded)
+            - rawfield:     html object, containing raw latex
+            - displayfield: html object, containing display latex
+
+        returns:
+            [nothing]
+        */
+
+        fetch(apiurl + encodeURIComponent(text))
+            .then(function(response) {
+                return response.text();
+            })
+            .then(function(mytext) {
+                console.log(mytext)
+
+                if(mytext==' '){
+                    return;
+                }
+                rawfield.innerHTML = "$" + mytext + "$";
+
+                displayfield.innerHTML = "$$" + mytext + "$$";
+                MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        });
+    }
+
+
     document.addEventListener("DOMContentLoaded", function () {
         startButton = document.getElementById("startButton");
         stopButton = document.getElementById("stopButton");
-        rawLatexField = document.getElementById("rawlatex");
-        displayLatexField = document.getElementById("displaylatex");
+        fastRawLatexField = document.querySelector("#fastapi .rawlatex");
+        fastDisplayLatexField = document.querySelector("#fastapi .displaylatex");
+        fullRawLatexField = document.querySelector("#fullapi .rawlatex");
+        fullDisplayLatexField = document.querySelector("#fullapi .displaylatex") ;
 
         startButton.addEventListener("click", function () {
 
@@ -144,21 +194,8 @@
                 text = curtext + text;
                 ncurtext = text;
 
-                fetch('{{ api_url }}'  + '/fast/' + encodeURIComponent(text))
-                    .then(function(response) {
-                        return response.text();
-                    })
-                    .then(function(mytext) {
-                        console.log(mytext)
-
-                        if(mytext==' '){
-                                return
-                        }
-                        rawLatexField.innerHTML = "$" + mytext + "$";
-
-                        displayLatexField.innerHTML = "$$" + mytext + "$$";
-                        MathJax.Hub.Queue(["Typeset",MathJax.Hub,"displaylatex"]);
-                    });
+                // call the fast API!
+                callLatexAPI(LatexAPIURLs.FAST, text, fastRawLatexField, fastDisplayLatexField);
             };
             recognizer.recognized = function (r, ev) {
                 console.log('recognized!');
@@ -170,6 +207,9 @@
                 }*/
                 curtext += ' ';
                 console.log(curtext);
+
+                // call the full API!
+                callLatexAPI(LatexAPIURLs.FULL, curtext, fullRawLatexField, fullDisplayLatexField);
             };
 
 
@@ -213,20 +253,10 @@
             recognizer.stopContinuousRecognitionAsync(
                 function(result) {
                     console.log('stopping continuous speech recognition');
-                    if (false) {
-                        fetch('{{ api_url }}'  + '/full/' + encodeURIComponent(curtext))
-                        .then(function(response) {
-                            return response.text();
-                        })
-                        .then(function(mytext) {
-                            console.log(mytext)
 
-                            rawLatexField.innerHTML = "$" + mytext + "$";
-
-                            displayLatexField.innerHTML = "$$" + mytext + "$$";
-                            MathJax.Hub.Queue(["Typeset",MathJax.Hub,"displaylatex"]);
-                        });
-                    }
+                    // call the full API!
+                    // use the ncurtext since that contains the most recent version
+                    callLatexAPI(LatexAPIURLs.FULL, ncurtext, fullRawLatexField, fullDisplayLatexField);
                     
                 },
                 function (err) {
