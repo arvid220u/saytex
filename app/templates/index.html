@@ -12,6 +12,7 @@
 <script>
     function copyToClipboard(copy_from_class) {
         // Select the copy anchor text
+        window.getSelection().removeAllRanges();
         var emailLink = document.querySelector(copy_from_class);
         var range = document.createRange();
         range.selectNode(emailLink);
