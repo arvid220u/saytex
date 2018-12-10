@@ -48,7 +48,7 @@ def fullapi(text):
         
         try:
             latex = latexconversion.wolframlatex(expression)
-        except:
+        except latexconversion.WolframError:
             latex = latexconversion.simplelatex(expression)
 
         if finallatex != "":
