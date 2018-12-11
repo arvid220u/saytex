@@ -1,8 +1,19 @@
 # saytex api
 
+
+## Installation
+
 Install by running
 
 `./setup.sh`
+
+Copy config and add API keys:
+
+```cp config_template.py config.py
+vim config.py```
+
+
+## Running
 
 Activate the virtualenv:
 
@@ -12,6 +23,6 @@ Run in production:
 
 `./run-production.sh`
 
-Kill it:
+Kill in production:
 
 `killall gunicorn`
