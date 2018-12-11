@@ -9,7 +9,7 @@ Install by running
 ./setup.sh
 ```
 
-Copy config and add API keys:
+Copy config and modify if need be:
 
 ```
 cp config_template.py config.py
