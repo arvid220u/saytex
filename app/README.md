@@ -4,10 +4,14 @@ Install by running
 
 `./setup.sh`
 
+Activate the virtualenv:
+
+`source venv/bin/activate`
+
 Run in production:
 
 `./run-production.sh`
 
-You might need to do this first:
+Kill it:
 
-`source venv/bin/activate`
+`killall gunicorn`
