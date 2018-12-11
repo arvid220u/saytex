@@ -10,7 +10,8 @@ Install by running
 Copy config and add API keys:
 
 ```cp config_template.py config.py
-vim config.py```
+vim config.py
+```
 
 
 ## Running
