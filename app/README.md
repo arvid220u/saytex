@@ -3,7 +3,7 @@
 
 ## Installation
 
-Install by running
+Install:
 
 ```
 ./setup.sh
