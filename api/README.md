@@ -5,11 +5,14 @@
 
 Install by running
 
-`./setup.sh`
+```
+./setup.sh
+```
 
 Copy config and add API keys:
 
-```cp config_template.py config.py
+```
+cp config_template.py config.py
 vim config.py
 ```
 
@@ -18,12 +21,18 @@ vim config.py
 
 Activate the virtualenv:
 
-`source venv/bin/activate`
+```
+source venv/bin/activate
+```
 
 Run in production:
 
-`./run-production.sh`
+```
+./run-production.sh
+```
 
 Kill in production:
 
-`killall gunicorn`
+```
+killall gunicorn
+```
