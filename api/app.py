@@ -27,7 +27,7 @@ def logging_init():
 def fullapi(text):
     """
     converts string to latex using wolfram API
-    if an error is returned, the fastapi is used as a fallback
+    error is returned as \text{Error}
 
     parameters:
         text: the spoken string to be converted into latex code
@@ -36,7 +36,6 @@ def fullapi(text):
         latex code
     """
 
-    # split the text at equals
     # maybe introduce caching here at some point, so that all wolfram expressions don't need to be re-evaluated?
     # smart splitting needs to be done. for example, if the equals sign is after a 'from' then don't split
 
@@ -46,10 +45,17 @@ def fullapi(text):
 
     for expression in expressions:
         
+        if expression in ["equals","is equal to"]:
+            continue
+
+        if expression.strip() == "":
+            continue
+
         try:
             latex = latexconversion.wolframlatex(expression)
         except latexconversion.WolframError:
-            latex = latexconversion.simplelatex(expression)
+            #latex = latexconversion.simplelatex(expression)
+            latex = r"\text{error}"
 
         if finallatex != "":
             finallatex += " = "

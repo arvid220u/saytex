@@ -17,7 +17,6 @@ math_symbols = [
         ('plus', '+'),
         ('minus', '-'),
         ('factorial', '!'),
-        ('over', '/'),
         ('divided by', '/'),
         ('to the power of', '^'),
         ('times', '*'),
@@ -53,11 +52,15 @@ common_mischaracterizations = [
         ('aid','a'),
         ('beat','b'),
         ('nfinity','infinity'),
+        ('sign','sine'),
+        ('menace','minus'),
+        ('age','h'),
 ]
 
 # not used for wolfram alpha, but used for fast API
 math_symbols_aggressive = [
         ('by', '*'),
+        ('over', '/'),
 ]
 
 # not used for wolfram alpha, but used for fast API
@@ -65,7 +68,6 @@ common_mischaracterizations_aggressive = [
         ('is',' '),
         ('the',' '),
         ('of',' '),
-        ('sign','sine'),
         ('such that','then'),
         ('we get','then'),
         ('dan','then'),
