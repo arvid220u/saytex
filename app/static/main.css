@@ -5,6 +5,9 @@ body {
     width:100%;
     text-align:center;
 }
+[contenteditable="true"]:focus, .MathJax:focus, .mjx-chtml:focus, .MathJax_SVG:focus {
+    outline: none;
+}
 
 
 

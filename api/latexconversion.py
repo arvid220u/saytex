@@ -2,6 +2,7 @@ import logging
 import requests
 import urllib
 import re
+import config
 
 import latexengine
 
@@ -16,7 +17,6 @@ math_symbols = [
         ('plus', '+'),
         ('minus', '-'),
         ('factorial', '!'),
-        ('over', '/'),
         ('divided by', '/'),
         ('to the power of', '^'),
         ('times', '*'),
@@ -52,11 +52,15 @@ common_mischaracterizations = [
         ('aid','a'),
         ('beat','b'),
         ('nfinity','infinity'),
+        ('sign','sine'),
+        ('menace','minus'),
+        ('age','h'),
 ]
 
 # not used for wolfram alpha, but used for fast API
 math_symbols_aggressive = [
         ('by', '*'),
+        ('over', '/'),
 ]
 
 # not used for wolfram alpha, but used for fast API
@@ -64,7 +68,6 @@ common_mischaracterizations_aggressive = [
         ('is',' '),
         ('the',' '),
         ('of',' '),
-        ('sign','sine'),
         ('such that','then'),
         ('we get','then'),
         ('dan','then'),
@@ -80,25 +83,6 @@ common_mischaracterizations_aggressive = [
 
 
 import json
-
-def persist_to_file(file_name):
-
-    def decorator(original_func):
-
-        try:
-            cache = json.load(open(file_name, 'r'))
-        except (IOError, ValueError):
-            cache = {}
-
-        def new_func(param):
-            if param not in cache:
-                cache[param] = original_func(param)
-                json.dump(cache, open(file_name, 'w'))
-            return cache[param]
-
-        return new_func
-
-    return decorator
 
 class WolframError(Exception):
     pass
@@ -117,11 +101,13 @@ def wolframlatex(text):
 
     logging.info("start wolframlatex")
 
-    with open('wolframcache.txt','r') as wolframcache:
-        cache = json.load(wolframcache)
-        if text in cache:
-            logging.info("found string in cache; using that")
-            return cache[text]
+
+    if config.WOLFRAM_CACHING:
+        with open('wolframcache.txt','r') as wolframcache:
+            cache = json.load(wolframcache)
+            if text in cache:
+                logging.info("found string in cache; using that")
+                return cache[text]
 
     preprocessed = preprocess(text)
 
@@ -149,9 +135,10 @@ def wolframlatex(text):
     if '$Failed' in latex:
         raise WolframError
 
-    with open('wolframcache.txt','w') as wolframcache:
-        cache[text] = latex
-        json.dump(cache, wolframcache)
+    if config.WOLFRAM_CACHING:
+        with open('wolframcache.txt','w') as wolframcache:
+            cache[text] = latex
+            json.dump(cache, wolframcache)
 
 
     return latex
