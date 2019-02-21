@@ -6,18 +6,32 @@ The general idea is that to convert speech to LaTeX, we need to deal with two di
 
 ## SayTeX
 
-Let's start with SayTeX, which aims to solve problem (1), namely that LaTeX commands are hard to pronounce. What follows is a list of properties that SayTeX syntax must follow:
+### Version 0.1
 
-1. One-to-one mapping to LaTeX. No exceptions. (hmm. raw mode? allow numbers both as words and sequence of digits? allow plus signs?)
-2. Easy to pronounce. No special symbols and no numbers. Only words and letters.
-3. Case insensitive.
-4. Linear-time conversion to LaTeX.
+Let's start with SayTeX, which aims to solve problem (1), namely that LaTeX commands are hard to pronounce. What follows is a list of properties that SayTeX syntax must follow.
 
-## SayTeX+
+1. One-to-one mapping to LaTeX. No exceptions. 
+2. Easy to pronounce.
+3. No special symbols. 
+4. Only words and numbers.
+5. Case sensitive.
+6. Linear-time conversion to LaTeX.
 
-SayTeX+ addresses problem (2), namely that spoken math is not one-to-one with LaTeX. SayTeX+ has no formal syntax requirements, other than that it should be possible to unambiguously convert SayTeX+ to SayTeX. What follows is a non-exhaustive list of possible features that SayTeX+ can have:
+Some contention exists regarding 1, 4 and 5. The points of debate are listed below.
+
+1. The idea to add a command to provide a raw LaTeX mode was considered. With that, SayTeX code like "raw begin \frac{1}{2} end" would be valid. This would be an exception to the one-to-one mapping. It was eventually decided that this would functionality would not be implemented, since a similar thing can be achieved in SayTeX+ if the one-to-one property is kept.
+4. It was considered to only allow words, and no numbers. Thus, the number "56" would have to be represented as "fifty six". However, this was decided against, for two reasons: (1) some text-to-speech software might do the number conversion already, and it would be silly for SayTeX+ to convert a number to its language version just so SayTeX could convert it back; and (2) there might be multiple ways to represent a number as a sequence of words.
+5. Originally, SayTeX was intended to be case insensitive. That is, "A" would be represented as "capital a". This was decided against, for similar reasons as numbers.
+
+The SayTeX 0.1 syntax is outlined more precisely in the `saytex-v01.txt`.
+
+## SayTeX+ 
+
+### Version 0.1
+
+SayTeX+ addresses problem (2), namely that spoken math is not one-to-one with LaTeX. SayTeX+ has no formal syntax requirements, other than that it should be possible to unambiguously convert SayTeX+ to SayTeX. What follows is a non-exhaustive list of possible features that SayTeX+ can have.
 
 - Shorthand syntax for common expressions. For example, "a over b" could convert to "fraction begin a end begin b end".
 - Automatically inserted spaces. For example, in integrals, a space could be inserted.
-- Adaptations for typing, such as converting "A" to "capital a".
+- Converting "capital a" to "A" and "thirty six" to "36".
 - Recognition of LaTeX within SayTeX+ expression.
