@@ -19,9 +19,9 @@ Let's start with SayTeX, which aims to solve problem (1), namely that LaTeX comm
 
 Some contention exists regarding 1, 4 and 5. The points of debate are listed below.
 
-1. The idea to add a command to provide a raw LaTeX mode was considered. With that, SayTeX code like "raw begin \frac{1}{2} end" would be valid. This would be an exception to the one-to-one mapping. It was eventually decided that this would functionality would not be implemented, since a similar thing can be achieved in SayTeX+ if the one-to-one property is kept.
-4. It was considered to only allow words, and no numbers. Thus, the number "56" would have to be represented as "fifty six". However, this was decided against, for two reasons: (1) some text-to-speech software might do the number conversion already, and it would be silly for SayTeX+ to convert a number to its language version just so SayTeX could convert it back; and (2) there might be multiple ways to represent a number as a sequence of words.
-5. Originally, SayTeX was intended to be case insensitive. That is, "A" would be represented as "capital a". This was decided against, for similar reasons as numbers.
+1. (1) The idea to add a command to provide a raw LaTeX mode was considered. With that, SayTeX code like "raw begin \frac{1}{2} end" would be valid. This would be an exception to the one-to-one mapping. It was eventually decided that this functionality would not be implemented, since a similar thing can be achieved in SayTeX+ if the one-to-one property is kept.
+4. (4) It was considered to only allow words, and no numbers. Thus, the number "56" would have to be represented as "fifty six". However, this was decided against, for two reasons: (1) some text-to-speech software might do the number conversion already, and it would be silly for SayTeX+ to convert a number to its language version just so SayTeX could convert it back; and (2) there might be multiple ways to represent a number as a sequence of words.
+5. (5) Originally, SayTeX was intended to be case insensitive. That is, "A" would be represented as "capital a". This was decided against, for similar reasons as numbers.
 
 The SayTeX 0.1 syntax is outlined more precisely in the `saytex-v01.txt`.
 
@@ -35,3 +35,4 @@ SayTeX+ addresses problem (2), namely that spoken math is not one-to-one with La
 - Automatically inserted spaces. For example, in integrals, a space could be inserted.
 - Converting "capital a" to "A" and "thirty six" to "36".
 - Recognition of LaTeX within SayTeX+ expression.
+- Completion of incomplete expressions at the end of the string to avoid compile errors.
