@@ -23,7 +23,7 @@ Some contention exists regarding 1, 4 and 5. The points of debate are listed bel
 4. (4) It was considered to only allow words, and no numbers. Thus, the number "56" would have to be represented as "fifty six". However, this was decided against, for two reasons: (1) some text-to-speech software might do the number conversion already, and it would be silly for SayTeX+ to convert a number to its language version just so SayTeX Syntax could convert it back; and (2) there might be multiple ways to represent a number as a sequence of words.
 5. (5) Originally, SayTeX Syntax was intended to be case insensitive. That is, "A" would be represented as "capital a". This was decided against, for similar reasons as numbers.
 
-SayTeX Syntax version 0.1 is outlined more precisely in `saytex-syntax-v01.txt`.
+SayTeX Syntax version 0.1 is outlined more precisely in `syntax-specifications/saytex-syntax-v01.txt`.
 
 ## SayTeX+ 
 
@@ -39,4 +39,4 @@ SayTeX+ addresses problem (2), namely that spoken math is not one-to-one with La
 
 SayTeX+ needs to have semantical understanding of the underlying expression. To achieve this, it is, in theory, conceived of as a formal grammar.
 
-SayTeX+ version 0.1 is outlined more precisely in `saytex-plus-v01.txt`.
+SayTeX+ version 0.1 is outlined more precisely in `syntax-specifications/saytex-plus-v01.txt`.
