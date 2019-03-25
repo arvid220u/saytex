@@ -72,6 +72,16 @@ class TestToLatex(unittest.TestCase):
         latex = "\\alpha_i + \\beta_i = \\gamma_i"
         self.verify(saytex, latex)
 
+    def test_11(self):
+        saytex = "alpha subscript i plus beta subscript i less than or equal to gamma subscript i"
+        latex = "\\alpha_i + \\beta_i \\leq \\gamma_i"
+        self.verify(saytex, latex)
+    
+    def test_12(self):
+        saytex = "alpha subscript i plus beta subscript i less than gamma subscript i"
+        latex = "\\alpha_i + \\beta_i < \\gamma_i"
+        self.verify(saytex, latex)
+
 
 
 if __name__ == '__main__':

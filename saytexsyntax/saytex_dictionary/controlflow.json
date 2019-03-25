@@ -14,5 +14,21 @@
     {
         "saytex": "equals",
         "latex": "="
+    },
+    {
+        "saytex": "less than",
+        "latex": "<"
+    },
+    {
+        "saytex": "greater than",
+        "latex": ">"
+    },
+    {
+        "saytex": "less than or equal to",
+        "latex": "\\leq"
+    },
+    {
+        "saytex": "greater than or equal to",
+        "latex": "\\geq"
     }
 ]
