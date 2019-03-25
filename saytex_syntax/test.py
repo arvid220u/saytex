@@ -61,6 +61,11 @@ class TestToLatex(unittest.TestCase):
         saytex = "integral subscript 0 superscript begin n plus 1 end x dx"
         latex = "\\int_0^{n + 1} x dx"
         self.verify(saytex, latex)
+    
+    def test_09(self):
+        saytex = "fraction begin x end begin y end"
+        latex = "\\frac{x}{y}"
+        self.verify(saytex, latex)
 
 
 if __name__ == '__main__':

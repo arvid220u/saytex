@@ -36,7 +36,7 @@
     {
         "saytex": "begin",
         "latex": "{",
-        "left_space": 1,
+        "left_space": 0,
         "right_space": 0
     },
     {
@@ -44,5 +44,11 @@
         "latex": "}",
         "left_space": 0,
         "right_space": 1
+    },
+    {
+        "saytex": "fraction",
+        "latex": "\\frac",
+        "left_space": 1,
+        "right_space": 0
     }
 ]
