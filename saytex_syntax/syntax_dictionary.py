@@ -44,7 +44,7 @@ class SyntaxDictionary:
         # make sure that the syntax is correctly formatted
         for syntax_item in self.syntax_list:
             if "saytex" not in syntax_item or "latex" not in syntax_item:
-                raise InvalidSyntaxFile
+                raise InvalidSyntaxFile("Every element needs to have a saytex field and a latex field")
             # provide default values
             self.make_syntax_entry_default(syntax_item)
             
@@ -52,6 +52,9 @@ class SyntaxDictionary:
         # create the syntax_dictionary from saytex to an index in the syntax_list
         self.syntax_dictionary = {}
         for syntax_index, syntax_item in enumerate(self.syntax_list):
+            # make sure that there is no command appearing twice
+            if syntax_item["saytex"] in self.syntax_dictionary:
+                raise InvalidSyntaxFile("SayTeX command appearing twice: " + syntax_item["saytex"])
             self.syntax_dictionary[syntax_item["saytex"]] = syntax_index
 
     def make_syntax_entry_default(self, syntax_item):
