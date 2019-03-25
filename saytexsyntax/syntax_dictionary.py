@@ -3,6 +3,7 @@ Defines a SyntaxDictionary class which handles reading from a SayTeX Syntax file
 """
 
 import json
+import glob
 
 class InvalidSyntaxFile(Exception):
     """
@@ -18,14 +19,22 @@ class SyntaxDictionary:
     Represents a Syntax Dictionary.
     """
 
-    def __init__(self, syntax_file):
+    def __init__(self, syntax_file=None, syntax_directory=None):
         """
-        Initializes a new SyntaxDictionary using the syntax_file.
-        Raises exception if the syntax_file
+        Initializes a new SyntaxDictionary using the syntax_file or syntax_directory.
+        Raises exception not exactly one of syntax_file and syntax_directory is None.
         """
         # set the syntax file
         # the syntax file must have the correct format, as specified in config.py
         self.syntax_file = syntax_file
+        # set the syntax directory
+        self.syntax_directory = syntax_directory
+
+        # make sure that exactly one of them is None
+        if syntax_file == None and syntax_directory == None:
+            raise Exception("Either syntax_file or syntax_directory required.")
+        if syntax_file != None and syntax_directory != None:
+            raise Exception("Only one of syntax_file and syntax_directory can be provided.")
 
         # interpret the syntax file
         # this will raise an error if the syntax file is wrongly formatted
@@ -34,12 +43,21 @@ class SyntaxDictionary:
 
     def load_syntax(self):
         """
-        Loads the syntax defined in self.syntax_file into
+        Loads the syntax defined in self.syntax_file or self.syntax_directory into
         the array self.syntax_list and the dictionary
         self.syntax_dictionary.
         """
-        with open(self.syntax_file, 'r') as sf:
-            self.syntax_list = json.load(sf)
+        if self.syntax_file != None:
+            with open(self.syntax_file, 'r') as sf:
+                self.syntax_list = json.load(sf)
+        elif self.syntax_directory != None:
+            self.syntax_list = []
+            for f in glob.glob(self.syntax_directory + "/*.json"):
+                with open(f, 'r') as sf:
+                    self.syntax_list.extend(json.load(sf))
+        else:
+            # should never happen!
+            raise Exception("Both syntax_file and syntax_directory are None; cannot load syntax.")
 
         # make sure that the syntax is correctly formatted
         for syntax_item in self.syntax_list:

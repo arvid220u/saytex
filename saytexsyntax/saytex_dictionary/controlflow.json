@@ -1,0 +1,14 @@
+[
+    {
+        "saytex": "begin",
+        "latex": "{",
+        "left_space": 0,
+        "right_space": 0
+    },
+    {
+        "saytex": "end",
+        "latex": "}",
+        "left_space": 0,
+        "right_space": 1
+    }
+]

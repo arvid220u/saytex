@@ -1,0 +1,10 @@
+[
+    {
+        "saytex": "integral",
+        "latex": "\\int"
+    },
+    {
+        "saytex": "infinity",
+        "latex": "\\infty"
+    }
+]

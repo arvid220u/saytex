@@ -24,31 +24,5 @@
         "left_space": 0,
         "right_space": 0,
         "insert_curly_brackets_right": true
-    },
-    {
-        "saytex": "integral",
-        "latex": "\\int"
-    },
-    {
-        "saytex": "infinity",
-        "latex": "\\infty"
-    },
-    {
-        "saytex": "begin",
-        "latex": "{",
-        "left_space": 0,
-        "right_space": 0
-    },
-    {
-        "saytex": "end",
-        "latex": "}",
-        "left_space": 0,
-        "right_space": 1
-    },
-    {
-        "saytex": "fraction",
-        "latex": "\\frac",
-        "left_space": 1,
-        "right_space": 0
     }
 ]

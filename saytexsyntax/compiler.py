@@ -29,15 +29,15 @@ class SaytexSyntax:
         """
         Initializes SaytexSyntax. Specifically, a syntax dictionary will be loaded.
         """
-        # load the syntax dictionary from the SYNTAX_FILE specified in config
-        self.load_syntax_dictionary(config.SYNTAX_FILE)
+        # load the syntax dictionary from the SYNTAX_DIRECTORY specified in config
+        self.load_syntax_dictionary(config.SYNTAX_DIRECTORY)
 
 
-    def load_syntax_dictionary(self, syntax_file):
+    def load_syntax_dictionary(self, syntax_directory):
         """
         Load the syntax dictionary as self.syntax_dictionary.
         """
-        self.syntax_dictionary = syntax_dictionary.SyntaxDictionary(syntax_file)
+        self.syntax_dictionary = syntax_dictionary.SyntaxDictionary(syntax_directory=syntax_directory)
 
 
     def to_latex(self, saytex_string, word_list = None, word_index = 0, dp_memo = None, next_params = {}):

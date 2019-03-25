@@ -1,15 +1,8 @@
 """
-The path to the syntax file.
-The syntax file must be in json format, being an array in which
-every element has at least two fields: "saytex" representing the
-SayTeX Syntax command, and "latex" representing the corresponding
-LaTeX command or symbol. Additionally, there are two optional fields:
-"left_space" and "right_space" which are integers indicating spacing
-preferences for the command. Normally, these values are either 0 or 1;
-0 indicating no space, and 1 indicating a space. If no value is provided,
-the command is assumed to have a space preference of 1 in both directions.
+The path to the directory containing all syntax files.
+The specifications for the files can be found in saytex-syntax-v01.md.
 """
-SYNTAX_FILE = "saytex_dictionary.json"
+SYNTAX_DIRECTORY = "saytex_dictionary"
 
 
 """

@@ -1,0 +1,162 @@
+[
+    {
+        "saytex": "alpha",
+        "latex": "\\alpha"
+    },
+    {
+        "saytex": "beta",
+        "latex": "\\beta"
+    },
+    {
+        "saytex": "gamma",
+        "latex": "\\gamma"
+    },
+    {
+        "saytex": "zeta",
+        "latex": "\\zeta"
+    },
+    {
+        "saytex": "eta",
+        "latex": "\\eta"
+    },
+    {
+        "saytex": "theta",
+        "latex": "\\theta"
+    },
+    {
+        "saytex": "iota",
+        "latex": "\\iota"
+    },
+    {
+        "saytex": "kappa",
+        "latex": "\\kappa"
+    },
+    {
+        "saytex": "lambda",
+        "latex": "\\lambda"
+    },
+    {
+        "saytex": "mu",
+        "latex": "\\mu"
+    },
+    {
+        "saytex": "nu",
+        "latex": "\\nu"
+    },
+    {
+        "saytex": "xi",
+        "latex": "\\xi"
+    },
+    {
+        "saytex": "pi",
+        "latex": "\\pi"
+    },
+    {
+        "saytex": "rho",
+        "latex": "\\rho"
+    },
+    {
+        "saytex": "tau",
+        "latex": "\\tau"
+    },
+    {
+        "saytex": "upsilon",
+        "latex": "\\upsilon"
+    },
+    {
+        "saytex": "phi",
+        "latex": "\\phi"
+    },
+    {
+        "saytex": "chi",
+        "latex": "\\chi"
+    },
+    {
+        "saytex": "psi",
+        "latex": "\\psi"
+    },
+    {
+        "saytex": "omega",
+        "latex": "\\omega"
+    },
+    {
+        "saytex": "Alpha",
+        "latex": "\\Alpha"
+    },
+    {
+        "saytex": "Beta",
+        "latex": "\\Beta"
+    },
+    {
+        "saytex": "Gamma",
+        "latex": "\\Gamma"
+    },
+    {
+        "saytex": "Zeta",
+        "latex": "\\Zeta"
+    },
+    {
+        "saytex": "Eta",
+        "latex": "\\Eta"
+    },
+    {
+        "saytex": "Theta",
+        "latex": "\\Theta"
+    },
+    {
+        "saytex": "Iota",
+        "latex": "\\Iota"
+    },
+    {
+        "saytex": "Kappa",
+        "latex": "\\Kappa"
+    },
+    {
+        "saytex": "Lambda",
+        "latex": "\\Lambda"
+    },
+    {
+        "saytex": "Mu",
+        "latex": "\\Mu"
+    },
+    {
+        "saytex": "Nu",
+        "latex": "\\Nu"
+    },
+    {
+        "saytex": "Xi",
+        "latex": "\\Xi"
+    },
+    {
+        "saytex": "Pi",
+        "latex": "\\Pi"
+    },
+    {
+        "saytex": "Rho",
+        "latex": "\\Rho"
+    },
+    {
+        "saytex": "Tau",
+        "latex": "\\Tau"
+    },
+    {
+        "saytex": "Upsilon",
+        "latex": "\\Upsilon"
+    },
+    {
+        "saytex": "Phi",
+        "latex": "\\Phi"
+    },
+    {
+        "saytex": "Chi",
+        "latex": "\\Chi"
+    },
+    {
+        "saytex": "Psi",
+        "latex": "\\Psi"
+    },
+    {
+        "saytex": "Omega",
+        "latex": "\\Omega"
+    }
+]
