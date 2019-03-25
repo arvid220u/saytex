@@ -8,26 +8,12 @@
         "latex": "-"
     },
     {
-        "saytex": "multiplied by",
+        "saytex": "centered dot",
         "latex": "\\cdot"
     },
     {
-        "saytex": "to the power of",
+        "saytex": "superscript",
         "latex": "^",
-        "left_space": 0,
-        "right_space": 0,
-        "insert_curly_brackets_right": true
-    },
-    {
-        "saytex": "to",
-        "latex": "^",
-        "left_space": 0,
-        "right_space": 0,
-        "insert_curly_brackets_right": true
-    },
-    {
-        "saytex": "from",
-        "latex": "_",
         "left_space": 0,
         "right_space": 0,
         "insert_curly_brackets_right": true

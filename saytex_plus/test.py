@@ -34,12 +34,12 @@ class TestToLatex(unittest.TestCase):
         self.verify(saytex, latex)
     
     def test_03(self):
-        saytex = "5 plus 3 centered dot 8"
+        saytex = "5 plus 3 multiplied by 8"
         latex = "5 + 3 \\cdot 8"
         self.verify(saytex, latex)
     
     def test_04(self):
-        saytex = "5 plus 3 centered dot 8 superscript 2 plus 2"
+        saytex = "5 plus 3 multiplied by 8 to the power of 2 plus 2"
         latex = "5 + 3 \\cdot 8^2 + 2"
         self.verify(saytex, latex)
     
@@ -48,17 +48,17 @@ class TestToLatex(unittest.TestCase):
         self.saytex_exception(saytex)
 
     def test_06(self):
-        saytex = "integral subscript 0 superscript 10"
+        saytex = "integral from 0 to 10"
         latex = "\\int_0^{10}"
         self.verify(saytex, latex)
 
     def test_07(self):
-        saytex = "integral subscript 0 superscript infinity minus a subscript b"
+        saytex = "integral from 0 to infinity minus a subscript b"
         latex = "\\int_0^\\infty - a_b"
         self.verify(saytex, latex)
     
     def test_08(self):
-        saytex = "integral subscript 0 superscript begin n plus 1 end x dx"
+        saytex = "integral from 0 to begin n plus 1 end x dx"
         latex = "\\int_0^{n + 1} x dx"
         self.verify(saytex, latex)
 
