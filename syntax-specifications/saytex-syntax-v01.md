@@ -17,4 +17,4 @@ should always be added. Optional; defaults to 1.
 - `right_space`: an integer indicating space preference. Same format as `left_space`.
 - `insert_curly_brackets_right`: a boolean indicating whether or not the command (operator)
 should require the word on its right to be encapsulated in curly braces (used by e.g. `^`).
-Optional; default to `false`.
+Optional; defaults to `false`.
