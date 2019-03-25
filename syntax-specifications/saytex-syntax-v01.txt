@@ -1,1 +1,3 @@
 A SayTeX command consists of at most 5 space-separated words.
+
+All words are either numbers, or words using the letters a-z and A-Z.

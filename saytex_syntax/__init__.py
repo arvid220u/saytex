@@ -1,2 +1,2 @@
 # import the core functionality
-from compiler import saytex_to_latex
+from compiler import SaytexSyntax
