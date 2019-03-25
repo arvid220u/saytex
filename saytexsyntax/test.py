@@ -67,6 +67,12 @@ class TestToLatex(unittest.TestCase):
         latex = "\\frac{x}{y}"
         self.verify(saytex, latex)
 
+    def test_10(self):
+        saytex = "alpha subscript i plus beta subscript i equals gamma subscript i"
+        latex = "\\alpha_i + \\beta_i = \\gamma_i"
+        self.verify(saytex, latex)
+
+
 
 if __name__ == '__main__':
     res = unittest.main(verbosity=3, exit=False)

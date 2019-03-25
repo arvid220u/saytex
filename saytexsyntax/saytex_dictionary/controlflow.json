@@ -10,5 +10,9 @@
         "latex": "}",
         "left_space": 0,
         "right_space": 1
+    },
+    {
+        "saytex": "equals",
+        "latex": "="
     }
 ]
