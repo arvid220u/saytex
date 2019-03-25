@@ -40,7 +40,7 @@ class SaytexSyntax:
         self.syntax_dictionary = syntax_dictionary.SyntaxDictionary(syntax_file)
 
 
-    def to_latex(self, saytex_string, word_list = None, word_index = 0, dp_memo = None):
+    def to_latex(self, saytex_string, word_list = None, word_index = 0, dp_memo = None, next_params = {}):
         """
         Converts SayTeX Syntax into LaTeX code.
         :param saytex_string: A string containing valid SayTeX Syntax code.
@@ -50,6 +50,7 @@ class SaytexSyntax:
         :param word_index: The current index in the word_list that we are at. Used in recursive calls.
         If it is not valid SayTeX Syntax, a SaytexSyntaxError will be raised.
         :param dp_memo: A dictionary mapping indices in the word_list to generated LaTeX strings.
+        :param next_params: A dictionary of parameters to be passed to the next get_latex call.
         :return: A string containing a valid translation of the input string into LaTeX (if no exception).
         If word_index > 0, the return value is a tuple (string, value) where value is a measure of
         how good the string is as a LaTeX translation of saytex_string.
@@ -118,11 +119,19 @@ class SaytexSyntax:
         for command_length in range(1,config.MAX_WORDS_PER_SAYTEX_COMMAND+1):
             command_index_end = word_index + command_length
             command = " ".join(word_list[word_index:command_index_end])
-            latex = self.syntax_dictionary.get_latex(command)
+            # if this is a real command, it should not need curly brackets
+            try:
+                self.syntax_dictionary.get_syntax_entry(command)
+                next_params["insert_curly_brackets"] = False
+            except syntax_dictionary.UnrecognizedSaytexCommand:
+                pass
+            # get the latex
+            latex = self.syntax_dictionary.get_latex(command, params = next_params)
             # if latex is not None, recurse
             if latex != None:
                 try:
-                    ans = self.to_latex("", word_list=word_list, word_index=command_index_end, dp_memo=dp_memo)
+                    np = self.syntax_dictionary.get_next_params(command)
+                    ans = self.to_latex("", word_list=word_list, word_index=command_index_end, dp_memo=dp_memo, next_params=np)
                     # do not increase the value
                     possible_answers.append((latex + ans[0], ans[1]))
                 except SaytexSyntaxError:
@@ -133,10 +142,17 @@ class SaytexSyntax:
                 # remember that by the way we deal with spaces, we need to space-pad a word
                 # also, we want to increase the value since this is not ideal
                 if command_length == 1:
-                    word = " " + word_list[word_index] + " "
+                    # build a syntax entry for the word
+                    word = word_list[word_index]
+                    syntax_entry = {"saytex": word, "latex": word}
+                    self.syntax_dictionary.make_syntax_entry_default(syntax_entry)
+                    # if the word only has a single character, then one should not insert brackets
+                    if len(word) == 1:
+                        next_params["insert_curly_brackets"] = False
+                    processed_word = self.syntax_dictionary.post_process_latex(syntax_entry, **next_params)
                     try:
                         ans = self.to_latex("", word_list=word_list, word_index=command_index_end, dp_memo=dp_memo)
-                        possible_answers.append((word + ans[0], ans[1] + 1))
+                        possible_answers.append((processed_word + ans[0], ans[1] + 1))
                     except SaytexSyntaxError:
                         pass
         

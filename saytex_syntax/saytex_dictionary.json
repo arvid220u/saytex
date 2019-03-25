@@ -15,22 +15,48 @@
         "saytex": "to the power of",
         "latex": "^",
         "left_space": 0,
-        "right_space": 0
+        "right_space": 0,
+        "insert_curly_brackets_right": true
     },
     {
         "saytex": "to",
         "latex": "^",
         "left_space": 0,
-        "right_space": 0
+        "right_space": 0,
+        "insert_curly_brackets_right": true
     },
     {
         "saytex": "from",
         "latex": "_",
         "left_space": 0,
-        "right_space": 0
+        "right_space": 0,
+        "insert_curly_brackets_right": true
+    },
+    {
+        "saytex": "subscript",
+        "latex": "_",
+        "left_space": 0,
+        "right_space": 0,
+        "insert_curly_brackets_right": true
     },
     {
         "saytex": "integral",
         "latex": "\\int"
+    },
+    {
+        "saytex": "infinity",
+        "latex": "\\infty"
+    },
+    {
+        "saytex": "begin",
+        "latex": "{",
+        "left_space": 1,
+        "right_space": 0
+    },
+    {
+        "saytex": "end",
+        "latex": "}",
+        "left_space": 0,
+        "right_space": 1
     }
 ]

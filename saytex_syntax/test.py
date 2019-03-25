@@ -52,6 +52,16 @@ class TestToLatex(unittest.TestCase):
         latex = "\int_0^{10}"
         self.verify(saytex, latex)
 
+    def test_07(self):
+        saytex = "integral from 0 to infinity minus a subscript b"
+        latex = "\int_0^\infty - a_b"
+        self.verify(saytex, latex)
+    
+    def test_08(self):
+        saytex = "integral from 0 to begin n plus 1 end x dx"
+        latex = "\int_0^{n + 1} x dx"
+        self.verify(saytex, latex)
+
 
 if __name__ == '__main__':
     res = unittest.main(verbosity=3, exit=False)
