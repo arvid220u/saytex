@@ -1,0 +1,36 @@
+[
+    {
+        "saytex": "plus",
+        "latex": "+"
+    },
+    {
+        "saytex": "minus",
+        "latex": "-"
+    },
+    {
+        "saytex": "multiplied by",
+        "latex": "\\cdot"
+    },
+    {
+        "saytex": "to the power of",
+        "latex": "^",
+        "left_space": 0,
+        "right_space": 0
+    },
+    {
+        "saytex": "to",
+        "latex": "^",
+        "left_space": 0,
+        "right_space": 0
+    },
+    {
+        "saytex": "from",
+        "latex": "_",
+        "left_space": 0,
+        "right_space": 0
+    },
+    {
+        "saytex": "integral",
+        "latex": "\\int"
+    }
+]

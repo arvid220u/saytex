@@ -40,7 +40,7 @@ class SaytexSyntax:
         self.syntax_dictionary = syntax_dictionary.SyntaxDictionary(syntax_file)
 
 
-    def to_latex(self, saytex_string, word_list = None, word_index = 0, dp_memo = {}):
+    def to_latex(self, saytex_string, word_list = None, word_index = 0, dp_memo = None):
         """
         Converts SayTeX Syntax into LaTeX code.
         :param saytex_string: A string containing valid SayTeX Syntax code.
@@ -55,16 +55,23 @@ class SaytexSyntax:
         how good the string is as a LaTeX translation of saytex_string.
         """
 
-        # naively, it should just do linear-time string matching using the dictionary
-        # maybe, there might arise situations where a dp-based approach could profitably be used
-        # i do not expect that to every arise, but it can't really hurt to implement it that way,
-        # if anyway that scenario never occurs.
-        # therefore, do the DP thing. we need to have some sort of limit at the number of words
-        # in saytex. maybe max 3 words? max 5 words? should not affect the runtime at all
-        # i'd say 5 words. needs to be explicitly defined in saytex-syntax-v01.txt
+        # main idea: iterate recursively, and employ a DP strategy
+        # this might be too slow for big strings
+        # we're returning a string of length O(saytex_string) for all
+        # words in saytex_string. Since strings are copied each time,
+        # we are basically in O(n^2) time, if n = len(saytex_string)
+        # this is so sad. ah, there is a much better way. never return, just add to dp_memo.
+        # this is actually so sad. is there a better way to do this?
+        # nah, idk. there are better ways that would only keep track of five strings at a time
+        # and automatically change which index we are currently using but that would be so cumbersome
+        # and bad.
+        # another thing would be to instead of doing dp-matching just do naive back-tracking matching,
+        # which might, in hind-sight, be better??
+        # anyway, this is definitely fast enough for the time being. 
 
-        # okay, so just do linear string matching from the beginning to the end. easy money
-        # hmm, should a list of words be passed in instead of a string? this will reduce time, probably, maybe.
+        # initialize dp_memo
+        if dp_memo == None:
+            dp_memo = {}
 
         # if the word_index is in our dp_memo, then return that
         if word_index in dp_memo:
@@ -96,9 +103,9 @@ class SaytexSyntax:
         
 
         # if index is greater than or equal to the length of the word list,
-        # we can safely return an empty string. this is our base case.
+        # we can safely return an empty string with value 0. this is our base case.
         if word_index >= len(word_list):
-            dp_memo[word_index] = ""
+            dp_memo[word_index] = ("", 0)
             return dp_memo[word_index]
         
         # contains tuples on the form (latex, value) where latex is a string containing
