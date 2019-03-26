@@ -8,6 +8,34 @@
         "latex": "-"
     },
     {
+        "saytex": "plus or minus",
+        "latex": "\\pm"
+    },
+    {
+        "saytex": "minus or plus",
+        "latex": "\\mp"
+    },
+    {
+        "saytex": "times",
+        "latex": "\\times"
+    },
+    {
+        "saytex": "asterisk",
+        "latex": "\\ast"
+    },
+    {
+        "saytex": "star",
+        "latex": "\\star"
+    },
+    {
+        "saytex": "dagger",
+        "latex": "\\dagger"
+    },
+    {
+        "saytex": "double dagger",
+        "latex": "\\ddagger"
+    },
+    {
         "saytex": "centered dot",
         "latex": "\\cdot"
     },
@@ -25,6 +53,58 @@
         "right_space": 0,
         "insert_curly_brackets_right": true
     },
+
+    {
+        "saytex": "intersection",
+        "latex": "\\cap"
+    },
+    {
+        "saytex": "union",
+        "latex": "\\cup"
+    },
+    {
+        "saytex": "set minus",
+        "latex": "\\setminus"
+    },
+    {
+        "saytex": "wedge",
+        "latex": "\\wedge"
+    },
+
+    {
+        "saytex": "logical and",
+        "latex": "\\land"
+    },
+    {
+        "saytex": "logical or",
+        "latex": "\\lor"
+    },
+    {
+        "saytex": "logical not",
+        "latex": "\\lnot"
+    },
+
+    {
+        "saytex": "circle plus",
+        "latex": "\\oplus"
+    },
+    {
+        "saytex": "circle minus",
+        "latex": "\\ominus"
+    },
+    {
+        "saytex": "circle times",
+        "latex": "\\otimes"
+    },
+    {
+        "saytex": "circle slash",
+        "latex": "\\oslash"
+    },
+    {
+        "saytex": "circle dot",
+        "latex": "\\odot"
+    },
+
     {
         "saytex": "factorial",
         "latex": "!",

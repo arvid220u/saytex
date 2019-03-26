@@ -12,6 +12,81 @@
         "right_space": 1
     },
     {
+        "saytex": "left parenthesis",
+        "latex": "\\left("
+    },
+    {
+        "saytex": "right parenthesis",
+        "latex": "\\right)"
+    },
+    {
+        "saytex": "left brace",
+        "latex": "\\left\\{"
+    },
+    {
+        "saytex": "right brace",
+        "latex": "\\right\\}"
+    },
+    {
+        "saytex": "left ceil",
+        "latex": "\\lceil"
+    },
+    {
+        "saytex": "right ceil",
+        "latex": "\\rceil"
+    },
+    {
+        "saytex": "left floor",
+        "latex": "\\lfloor"
+    },
+    {
+        "saytex": "right floor",
+        "latex": "\\rfloor"
+    },
+    {
+        "saytex": "left square bracket",
+        "latex": "\\left["
+    },
+    {
+        "saytex": "right square bracket",
+        "latex": "\\right]"
+    },
+    {
+        "saytex": "left angle bracket",
+        "latex": "\\left\\langle"
+    },
+    {
+        "saytex": "right angle bracket",
+        "latex": "\\right\\rangle"
+    },
+
+    {
+        "saytex": "there exists",
+        "latex": "\\exists"
+    },
+    {
+        "saytex": "there exists exactly one",
+        "latex": "\\exists!"
+    },
+    {
+        "saytex": "there is no",
+        "latex": "\\nexists"
+    },
+    {
+        "saytex": "for all",
+        "latex": "\\forall"
+    },
+
+    {
+        "saytex": "implies",
+        "latex": "\\implies"
+    },
+    {
+        "saytex": "if and only if",
+        "latex": "\\iff"
+    },
+
+    {
         "saytex": "equals",
         "latex": "="
     },
@@ -42,6 +117,67 @@
     {
         "saytex": "is not equal to",
         "latex": "\\neq"
+    },
+
+    {
+        "saytex": "is parallel with",
+        "latex": "\\parallel"
+    },
+    {
+        "saytex": "is asymptotic to",
+        "latex": "\\asymp"
+    },
+    {
+        "saytex": "in",
+        "latex": "\\in"
+    },
+    {
+        "saytex": "is perpendicular to",
+        "latex": "\\perp"
+    },
+    {
+        "saytex": "models",
+        "latex": "\\models"
+    },
+    {
+        "saytex": "is not parallel with",
+        "latex": "\\nparallel"
+    },
+    {
+        "saytex": "bow tie",
+        "latex": "\\bowtie"
+    },
+    {
+        "saytex": "turnstile",
+        "latex": "\\vdash"
+    },
+    {
+        "saytex": "reversed turnstile",
+        "latex": "\\dashv"
+    },
+    {
+        "saytex": "has member",
+        "latex": "\\ni"
+    },
+    {
+        "saytex": "smile",
+        "latex": "\\smile"
+    },
+    {
+        "saytex": "frown",
+        "latex": "\\frown"
+    },
+    {
+        "saytex": "not in",
+        "latex": "\\notin"
+    },
+    {
+        "saytex": "divides",
+        "latex": "\\mid"
+    },
+    {
+        "saytex": "does not divide",
+        "latex": "\\nmid"
     },
 
     {

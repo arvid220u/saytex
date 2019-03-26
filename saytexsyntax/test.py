@@ -81,6 +81,11 @@ class TestToLatex(unittest.TestCase):
         saytex = "alpha subscript i plus beta subscript i is less than gamma subscript i"
         latex = "\\alpha_i + \\beta_i < \\gamma_i"
         self.verify(saytex, latex)
+    
+    def test_13(self):
+        saytex = "p in P implies a does not divide p"
+        latex = "p \\in P \implies a \\nmid p"
+        self.verify(saytex, latex)
 
 
 

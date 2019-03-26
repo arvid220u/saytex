@@ -12,6 +12,12 @@ class SaytexSyntaxError(Exception):
     """
     pass
 
+class MultipleSaytexInterpretations(Exception):
+    """
+    Raised in to_latex, if error.
+    """
+    pass
+
 class LatexParsingError(Exception):
     """
     Raised in from_latex, if error.
@@ -117,6 +123,9 @@ class SaytexSyntax:
 
         # iterate over all possible command lengths, now
         for command_length in range(1,config.MAX_WORDS_PER_SAYTEX_COMMAND+1):
+            # break if too far
+            if word_index + command_length > len(word_list):
+                break
             command_index_end = word_index + command_length
             command = " ".join(word_list[word_index:command_index_end])
             # if this is a real command, it should not need curly brackets
@@ -167,6 +176,18 @@ class SaytexSyntax:
             if a[1] < chosen_answer[1]:
                 chosen_answer = a
         
+        # return an error if there are multiple answers with the same value
+        answer_count = 0
+        for a in possible_answers[1:]:
+            if a[1] == chosen_answer[1]:
+                answer_count += 1
+                if answer_count >= 2:
+                    raise MultipleSaytexInterpretations("The following expression has more than 1 possible interpretation: " \
+                                                        + str(word_list) + " at index " + str(word_index) + \
+                                                        ". The possible interpretations are: " \
+                                                        + chosen_answer[0] + " and " + a[0] + ". Possible answers: " + \
+                                                        str(possible_answers))
+
         # if index is not 0, this is what we should return
         if word_index != 0:
             dp_memo[word_index] = chosen_answer

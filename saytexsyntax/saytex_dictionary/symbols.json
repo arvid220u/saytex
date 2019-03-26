@@ -3,6 +3,48 @@
         "saytex": "integral",
         "latex": "\\int"
     },
+
+    {
+        "saytex": "angle",
+        "latex": "\\angle"
+    },
+    {
+        "saytex": "triangle",
+        "latex": "\\triangle"
+    },
+    {
+        "saytex": "measured angle",
+        "latex": "\\measuredangle"
+    },
+    {
+        "saytex": "square",
+        "latex": "\\square"
+    },
+
+    {
+        "saytex": "natural numbers",
+        "latex": "\\N"
+    },
+    {
+        "saytex": "integers",
+        "latex": "\\Z"
+    },
+    {
+        "saytex": "rational numbers",
+        "latex": "\\Q"
+    },
+    {
+        "saytex": "real numbers",
+        "latex": "\\R"
+    },
+    {
+        "saytex": "complex numbers",
+        "latex": "\\C"
+    },
+    {
+        "saytex": "empty set",
+        "latex": "\\emptyset"
+    },
     {
         "saytex": "infinity",
         "latex": "\\infty"
