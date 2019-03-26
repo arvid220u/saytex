@@ -1,0 +1,22 @@
+[
+    {
+        "saytex": "natural logarithm",
+        "latex": "\\ln"
+    },
+    {
+        "saytex": "determinant",
+        "latex": "\\det"
+    },
+    {
+        "saytex": "probability",
+        "latex": "\\Pr"
+    },
+    {
+        "saytex": "greatest common divisor",
+        "latex": "\\gcd"
+    },
+    {
+        "saytex": "logarithm",
+        "latex": "\\log"
+    }
+]

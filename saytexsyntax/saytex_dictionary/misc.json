@@ -4,5 +4,41 @@
         "latex": "\\frac",
         "left_space": 1,
         "right_space": 0
+    },
+    {
+        "saytex": "small space",
+        "latex": "\\,"
+    },
+    {
+        "saytex": "medium space",
+        "latex": "\\:"
+    },
+    {
+        "saytex": "big space",
+        "latex": "\\;"
+    },
+    {
+        "saytex": "full space",
+        "latex": "\\quad"
+    },
+    {
+        "saytex": "double full space",
+        "latex": "\\qquad"
+    },
+    {
+        "saytex": "negative small space",
+        "latex": "\\!"
+    },
+    {
+        "saytex": "limit inferior",
+        "latex": "\\liminf"
+    },
+    {
+        "saytex": "limit superior",
+        "latex": "\\limsup"
+    },
+    {
+        "saytex": "limit",
+        "latex": "\\lim"
     }
 ]

@@ -88,8 +88,8 @@ class TestToLatex(unittest.TestCase):
         self.verify(saytex, latex)
     
     def test_14(self):
-        saytex = "integral subscript 0 superscript 1 sine left parenthesis x plus 1 right parenthesis dx equals fraction begin 1 end begin 2 end"
-        latex = "\\int_0^1 \\sin \\left( x + 1 \\right) dx = \\frac{1}{2}"
+        saytex = "integral subscript 0 superscript 1 sine left parenthesis x plus 1 right parenthesis small space dx equals fraction begin 1 end begin 2 end"
+        latex = "\\int_0^1 \\sin \\left( x + 1 \\right) \\, dx = \\frac{1}{2}"
         self.verify(saytex, latex)
 
 
