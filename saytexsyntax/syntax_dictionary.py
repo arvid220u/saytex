@@ -4,6 +4,7 @@ Defines a SyntaxDictionary class which handles reading from a SayTeX Syntax file
 
 import json
 import glob
+import config
 
 class InvalidSyntaxFile(Exception):
     """
@@ -63,6 +64,9 @@ class SyntaxDictionary:
         for syntax_item in self.syntax_list:
             if "saytex" not in syntax_item or "latex" not in syntax_item:
                 raise InvalidSyntaxFile("Every element needs to have a saytex field and a latex field")
+            # the length of the saytex command is limited by config
+            if len(syntax_item["saytex"].split(" ")) > config.MAX_WORDS_PER_SAYTEX_COMMAND:
+                raise InvalidSyntaxFile("Length of SayTeX command exceeds max length: " + syntax_item["saytex"])
             # provide default values
             self.make_syntax_entry_default(syntax_item)
             

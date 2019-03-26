@@ -24,5 +24,10 @@
         "left_space": 0,
         "right_space": 0,
         "insert_curly_brackets_right": true
+    },
+    {
+        "saytex": "factorial",
+        "latex": "!",
+        "left_space": 0
     }
 ]

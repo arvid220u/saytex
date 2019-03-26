@@ -10,7 +10,7 @@ This constant should correspond to the most recent definition of the SayTeX Synt
 Note that the total time of the SayTeX Compiler will be O(n*m) if m is the variable below,
 so be careful. (Also, it will be O(n^2).)
 """
-MAX_WORDS_PER_SAYTEX_COMMAND = 5
+MAX_WORDS_PER_SAYTEX_COMMAND = 7
 
 
 """
