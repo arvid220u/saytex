@@ -86,6 +86,11 @@ class TestToLatex(unittest.TestCase):
         saytex = "p in P implies a does not divide p"
         latex = "p \\in P \\implies a \\nmid p"
         self.verify(saytex, latex)
+    
+    def test_14(self):
+        saytex = "integral subscript 0 superscript 1 sine left parenthesis x plus 1 right parenthesis dx equals fraction begin 1 end begin 2 end"
+        latex = "\\int_0^1 \\sin \\left( x + 1 \\right) dx = \\frac{1}{2}"
+        self.verify(saytex, latex)
 
 
 

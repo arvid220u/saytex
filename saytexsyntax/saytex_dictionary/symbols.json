@@ -3,6 +3,18 @@
         "saytex": "integral",
         "latex": "\\int"
     },
+    {
+        "saytex": "sum",
+        "latex": "\\sum"
+    },
+    {
+        "saytex": "partial",
+        "latex": "\\partial"
+    },
+    {
+        "saytex": "aleph",
+        "latex": "\\aleph"
+    },
 
     {
         "saytex": "angle",

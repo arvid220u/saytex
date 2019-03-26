@@ -1,0 +1,101 @@
+[
+    {
+        "saytex": "cosine",
+        "latex": "\\cos"
+    },
+    {
+        "saytex": "tangent",
+        "latex": "\\tan"
+    },
+    {
+        "saytex": "arcsine",
+        "latex": "\\arcsin"
+    },
+    {
+        "saytex": "arccosine",
+        "latex": "\\arccos"
+    },
+    {
+        "saytex": "arctangent",
+        "latex": "\\arctan"
+    },
+    {
+        "saytex": "cosecant",
+        "latex": "\\csc"
+    },
+    {
+        "saytex": "secant",
+        "latex": "\\sec"
+    },
+    {
+        "saytex": "cotangent",
+        "latex": "\\cot"
+    },
+    {
+        "saytex": "arccosecant",
+        "latex": "\\arccsc"
+    },
+    {
+        "saytex": "arcsecant",
+        "latex": "\\arcsec"
+    },
+    {
+        "saytex": "arccotangent",
+        "latex": "\\arccot"
+    },
+    {
+        "saytex": "sine",
+        "latex": "\\sin"
+    },
+    
+
+
+    {
+        "saytex": "hyperbolic cosine",
+        "latex": "\\cosh"
+    },
+    {
+        "saytex": "hyperbolic tangent",
+        "latex": "\\tanh"
+    },
+    {
+        "saytex": "inverse hyperbolic sine",
+        "latex": "\\arsinh"
+    },
+    {
+        "saytex": "inverse hyperbolic cosine",
+        "latex": "\\arcosh"
+    },
+    {
+        "saytex": "inverse hyperbolic tangent",
+        "latex": "\\artanh"
+    },
+    {
+        "saytex": "hyperbolic cosecant",
+        "latex": "\\csch"
+    },
+    {
+        "saytex": "hyperbolic secant",
+        "latex": "\\sech"
+    },
+    {
+        "saytex": "hyperbolic cotangent",
+        "latex": "\\coth"
+    },
+    {
+        "saytex": "inverse hyperbolic cosecant",
+        "latex": "\\arcsch"
+    },
+    {
+        "saytex": "inverse hyperbolic secant",
+        "latex": "\\arsech"
+    },
+    {
+        "saytex": "inverse hyperbolic cotangent",
+        "latex": "\\arcoth"
+    },
+    {
+        "saytex": "hyperbolic sine",
+        "latex": "\\sinh"
+    }
+]
