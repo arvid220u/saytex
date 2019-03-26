@@ -4,6 +4,18 @@
         "latex": "\\int"
     },
     {
+        "saytex": "double integral",
+        "latex": "\\iint"
+    },
+    {
+        "saytex": "triple integral",
+        "latex": "\\iiint"
+    },
+    {
+        "saytex": "closed curve integral",
+        "latex": "\\oint"
+    },
+    {
         "saytex": "sum",
         "latex": "\\sum"
     },

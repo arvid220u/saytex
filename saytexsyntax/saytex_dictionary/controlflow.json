@@ -12,6 +12,10 @@
         "right_space": 1
     },
     {
+        "saytex": "line break",
+        "latex": "\\\\"
+    },
+    {
         "saytex": "left parenthesis",
         "latex": "\\left("
     },

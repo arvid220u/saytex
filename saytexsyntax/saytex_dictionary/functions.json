@@ -16,6 +16,10 @@
         "latex": "\\gcd"
     },
     {
+        "saytex": "square root",
+        "latex": "\\sqrt"
+    },
+    {
         "saytex": "logarithm",
         "latex": "\\log"
     }
