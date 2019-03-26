@@ -30,6 +30,23 @@
         "latex": "\\!"
     },
     {
+        "saytex": "centered dots",
+        "latex": "\\cdots"
+    },
+    {
+        "saytex": "lower dots",
+        "latex": "\\ldots"
+    },
+    {
+        "saytex": "vertical dots",
+        "latex": "\\vdots"
+    },
+    {
+        "saytex": "diagonal dots",
+        "latex": "\\ddots"
+    },
+
+    {
         "saytex": "limit inferior",
         "latex": "\\liminf"
     },
