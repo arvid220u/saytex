@@ -2,7 +2,7 @@ A SayTeX command consists of at most 7 space-separated words.
 
 Commands should generally read as if in a sentence. That is, most relations
 will take the form of verbs instead of nouns, such as "<" being "is less than"
-rather than just "less than (sign)". Also, commands should be a succinct as possible,
+rather than just "less than (sign)". Also, commands should be a succinct as possible
 when there are two equally valid ways of saying things; for example, "equals" is
 preferred over "is equal to."
 
