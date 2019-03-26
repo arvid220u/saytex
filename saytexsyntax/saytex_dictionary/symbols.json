@@ -70,6 +70,16 @@
         "latex": "\\emptyset"
     },
     {
+        "saytex": "prime",
+        "latex": "'",
+        "left_space": 0
+    },
+    {
+        "saytex": "double prime",
+        "latex": "''",
+        "left_space": 0
+    },
+    {
         "saytex": "infinity",
         "latex": "\\infty"
     }

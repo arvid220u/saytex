@@ -6,6 +6,12 @@
         "right_space": 0
     },
     {
+        "saytex": "binomial coefficient",
+        "latex": "\\binom",
+        "left_space": 1,
+        "right_space": 0
+    },
+    {
         "saytex": "small space",
         "latex": "\\,"
     },
