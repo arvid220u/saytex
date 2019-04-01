@@ -32,7 +32,7 @@ SayTeX Syntax version 0.1 is outlined more precisely in `syntax-specifications/s
 SayTeX+ addresses problem (2), namely that spoken math is not one-to-one with LaTeX. SayTeX+ has no formal syntax requirements, other than that it should be possible to unambiguously convert SayTeX+ to SayTeX. What follows is a non-exhaustive list of possible features that SayTeX+ can have.
 
 - Shorthand syntax for common expressions. For example, "a over b" could convert to "fraction begin a end begin b end".
-    - This includes simpler things like "to the power of" for "subscript" or "^".
+    - This includes simpler things like "to the power of" for "superscript" or "^".
 - Automatically inserted spaces. For example, in integrals, a space could be inserted.
 - Converting "capital a" to "A" and "thirty six" to "36".
 - Recognition of LaTeX within SayTeX+ expression.
