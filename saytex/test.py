@@ -3,9 +3,9 @@ import os
 import unittest
 import doctest
 
-import layers
+from . import layers
 
-from compiler import Saytex, UnrecognizableSaytexInput
+from .compiler import Saytex, UnrecognizableSaytexInput
 
 class TestSpeechRecognitionErrorDetection(unittest.TestCase):
 

@@ -2,8 +2,8 @@
 Defines the SaytexSyntax class, containing methods for converting between SayTeX and LaTeX.
 """
 
-import syntax_dictionary
-import config
+from . import syntax_dictionary
+from . import config
 
 
 class SaytexSyntaxError(Exception):

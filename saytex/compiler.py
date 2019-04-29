@@ -5,9 +5,9 @@ by first translating the input into SayTeX Syntax, after which the
 saytexsyntax module is used for the final LaTeX conversion.
 """
 
-import config
+from . import config
 
-from saytexsyntax import SaytexSyntax
+from .saytexsyntax import SaytexSyntax
 
 class UnrecognizableSaytexInput(Exception):
     """

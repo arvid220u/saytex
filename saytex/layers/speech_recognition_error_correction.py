@@ -4,7 +4,7 @@ Currently specific to the Microsoft speech engine, and might not produce
 good results if used with other speech recognition software.
 """
 
-from layer import SaytexLayer
+from .layer import SaytexLayer
 
 class SpeechRecognitionErrorCorrection(SaytexLayer):
 

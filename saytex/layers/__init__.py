@@ -3,7 +3,7 @@ Defines all layers, used for converting natural language into SayTeX Syntax.
 All layers should subclass the layer interface defined in layers.py.
 """
 
-from layers import *
+from . import *
 
 """
 The layer_id_to_class dictionary contains a mapping from a string identifying

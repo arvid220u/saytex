@@ -2,7 +2,7 @@
 Defines the base layer interface to be used by all layers.
 """
 
-import layers
+from . import *
 
 import re
 
@@ -16,7 +16,7 @@ class SaytexLayer:
         :param layer_id: str, representing the layer to create.
         :return: a SaytexLayer object, representing a particular layer
         """
-        return layers.layer_id_to_class[layer_id]()
+        return layer_id_to_class[layer_id]()
     
 
     def execute_layer(self, input_string):

@@ -1,2 +1,2 @@
 # import the core functionality
-from compiler import SaytexSyntax, SaytexSyntaxError
+from .compiler import SaytexSyntax, SaytexSyntaxError

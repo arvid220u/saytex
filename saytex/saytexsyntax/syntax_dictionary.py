@@ -4,7 +4,7 @@ Defines a SyntaxDictionary class which handles reading from a SayTeX Syntax file
 
 import json
 import glob
-import config
+from . import config
 
 class InvalidSyntaxFile(Exception):
     """
