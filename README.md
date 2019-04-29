@@ -15,7 +15,7 @@ Ideally, part two should not be necessary. However, as long as SayTeX continues 
 
 ## Progress
 
-- [ ] Develop a systematic SayTeX Syntax. This is a major and crucial task.
+- [x] Develop a systematic SayTeX Syntax. This is a major and crucial task.
 - [ ] Enable users to modify the output and store the modified result, so as to build up a database of correct mappings between speech and LaTeX that can later be used for e.g. machine learning.
 - [ ] Use a customized version of the Microsoft Speech API that is adapted to the SayTeX Syntax.
 - [ ] Integrate SayTeX with tools that are currently used by visually impaired students, to enable them to more easily typeset math formulas.
