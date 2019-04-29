@@ -1,15 +1,31 @@
 #!/usr/bin/env python3
 import os
-from compiler import SaytexSyntax, SaytexSyntaxError
 import unittest
 import doctest
 
+import layers
+
+from compiler import Saytex, InvalidSaytexPlus
+
+class TestSpeechRecognitionErrorDetection(unittest.TestCase):
+
+    def setUp(self):
+        self.layer = layers.SpeechRecognitionErrorDetection()
+    
+    def verify(self, inp, oup):
+        computed_output = self.layer.execute_layer(inp)
+        self.assertEqual(computed_output, oup)
+    
+    def test_01(self):
+        inp = "eggs times why"
+        oup = "x times y"
+        self.verify(inp, oup)
 
 class TestToLatex(unittest.TestCase):
 
     def setUp(self):
         # initialize the compiler
-        self.saytex_compiler = SaytexSyntax()
+        self.saytex_compiler = Saytex()
     
     def verify(self, saytex, latex):
         compiler_output = self.saytex_compiler.to_latex(saytex)
@@ -18,7 +34,7 @@ class TestToLatex(unittest.TestCase):
     def saytex_exception(self, saytex):
         try:
             self.saytex_compiler.to_latex(saytex)
-        except SaytexSyntaxError:
+        except InvalidSaytexPlus:
             self.assertTrue(True)
             return
         self.assertFalse(True, "SayTeX should have given exception, but it did not.")
