@@ -3,14 +3,12 @@ import os
 import unittest
 import doctest
 
-from . import layers
-
-from .compiler import Saytex, UnrecognizableSaytexInput
+from saytex import Saytex, UnrecognizableSaytexInput
 
 class TestSpeechRecognitionErrorDetection(unittest.TestCase):
 
     def setUp(self):
-        self.layer = layers.SpeechRecognitionErrorDetection()
+        self.layer = saytex.SpeechRecognitionErrorDetection()
     
     def verify(self, inp, oup):
         computed_output = self.layer.execute_layer(inp)

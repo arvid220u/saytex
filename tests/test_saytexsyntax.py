@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import os
-from .compiler import SaytexSyntax, SaytexSyntaxError
+from saytex import SaytexSyntax, SaytexSyntaxError
 import unittest
 import doctest
 
