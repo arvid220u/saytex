@@ -5,7 +5,7 @@ import doctest
 
 import layers
 
-from compiler import Saytex, InvalidSaytexPlus
+from compiler import Saytex, UnrecognizableSaytexInput
 
 class TestSpeechRecognitionErrorDetection(unittest.TestCase):
 
@@ -34,7 +34,7 @@ class TestToLatex(unittest.TestCase):
     def saytex_exception(self, saytex):
         try:
             self.saytex_compiler.to_latex(saytex)
-        except InvalidSaytexPlus:
+        except UnrecognizableSaytexInput:
             self.assertTrue(True)
             return
         self.assertFalse(True, "SayTeX should have given exception, but it did not.")

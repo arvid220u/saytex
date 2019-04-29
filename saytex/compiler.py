@@ -9,9 +9,9 @@ import config
 
 from saytexsyntax import SaytexSyntax
 
-class InvalidSaytexPlus(Exception):
+class UnrecognizableSaytexInput(Exception):
     """
-    Raised in to_latex and to_saytex, if the input does not conform to SayTeX+.
+    Raised in to_latex and to_saytex, if the input cannot be transformed into valid SayTeX Syntax.
     """
     pass
 
