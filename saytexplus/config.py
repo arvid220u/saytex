@@ -1,4 +1,3 @@
-# add config variables
 
 
 """
@@ -7,7 +6,7 @@ converting natural language into SayTeX Syntax. Changing the layers that are
 in use will affect what spoken math expressions that SayTeX can recognize.
 Each layer is represented by a string, which should correspond to a class
 defined in layers.py. To add a layer, its subclass needs to be created and
-the layer_id_to_class dictionary needs to be modified, both in layers.py, and
+the layer_id_to_class dictionary needs to be modified, both in the layers package, and
 additionally the layer needs to be added to used_layers and layer_priorities
 in config.py.
 """
