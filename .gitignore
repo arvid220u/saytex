@@ -3,3 +3,4 @@
 *.swp
 *.code-workspace
 .vscode
+__pycache__
