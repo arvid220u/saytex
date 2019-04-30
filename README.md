@@ -3,6 +3,10 @@ Speak math, get LaTeX!
 
 SayTeX is a tool for converting spoken math into LaTeX equations.
 
+## Installation
+
+The `saytex` package maybe depends on `setuptools`, since it uses `pkg_resources`. It is unclear though.
+
 ## Structural Overview
 
 As it currently stands, SayTeX consists of three parts operating somewhat independently:

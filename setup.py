@@ -18,6 +18,9 @@ setuptools.setup(
         ('Code', 'https://github.com/arvid220u/saytex')
     )),
     packages=setuptools.find_packages(),
+    package_data={
+        'saytex.saytexsyntax': ['saytex_dictionary/*.json']
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

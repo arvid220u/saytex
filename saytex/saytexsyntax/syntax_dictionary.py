@@ -3,7 +3,7 @@ Defines a SyntaxDictionary class which handles reading from a SayTeX Syntax file
 """
 
 import json
-import glob
+import pkg_resources
 from . import config
 
 class InvalidSyntaxFile(Exception):
@@ -49,12 +49,12 @@ class SyntaxDictionary:
         self.syntax_dictionary.
         """
         if self.syntax_file != None:
-            with open(self.syntax_file, 'r') as sf:
+            with open(pkg_resources.resource_filename(__name__, self.syntax_file), 'r') as sf:
                 self.syntax_list = json.load(sf)
         elif self.syntax_directory != None:
             self.syntax_list = []
-            for f in glob.glob(self.syntax_directory + "/*.json"):
-                with open(f, 'r') as sf:
+            for f in pkg_resources.resource_listdir(__name__, self.syntax_directory):
+                with open(pkg_resources.resource_filename(__name__, self.syntax_directory + "/" + f), 'r') as sf:
                     self.syntax_list.extend(json.load(sf))
         else:
             # should never happen!
