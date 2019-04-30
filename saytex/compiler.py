@@ -9,6 +9,8 @@ from . import config
 
 from .saytexsyntax import SaytexSyntax
 
+from .layers import SaytexLayer
+
 class UnrecognizableSaytexInput(Exception):
     """
     Raised in to_latex and to_saytex, if the input cannot be transformed into valid SayTeX Syntax.
@@ -70,7 +72,17 @@ class Saytex:
         # in_progress_string contains the string as it is being converted into saytex
         in_progress_string = math_string
 
-        # TODO: transformations
+        # go through all layers to transform the string, in their
+        # order of priority
+        layers = [layer for layer in config.used_layers if config.used_layers[layer]]
+
+        # sort the layers by priority
+        layers.sort(key = lambda layer_id : config.layer_priorities[layer_id])
+
+        # now apply the layers
+        for layer_id in layers:
+            layer = SaytexLayer.get_layer(layer_id)
+            in_progress_string = layer.execute_layer(in_progress_string)
 
         saytex_syntax = in_progress_string
 

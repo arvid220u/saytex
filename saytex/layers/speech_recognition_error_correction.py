@@ -6,7 +6,7 @@ good results if used with other speech recognition software.
 
 from .layer import SaytexLayer
 
-class SpeechRecognitionErrorCorrection(SaytexLayer):
+class SpeechRecognitionErrorCorrectionLayer(SaytexLayer):
 
     common_mischaracterizations = [
         ('see','c'),

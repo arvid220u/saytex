@@ -44,8 +44,8 @@ class SaytexLayer:
     def replace_words(self, word_tuples, input_string):
         """
         Replaces words in input_string using the word_tuples.
-        :param word_tuples: a list of tuples of two strings, where the first one
-        is the word to be replaced and the second one is the word to replace it with
+        :param word_tuples: a list of tuples of two strings, where the first one 
+            is the word to be replaced and the second one is the word to replace it with
         :input_string: str
         :return: str, with words replaced
         """

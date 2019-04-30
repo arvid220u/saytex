@@ -77,6 +77,11 @@ class TestToLatex(unittest.TestCase):
         saytex = "integral from 0 to begin n plus 1 end x dx"
         latex = "\\int_0^{n + 1} x dx"
         self.verify(saytex, latex)
+    
+    def test_09(self):
+        saytex = "eggs minus infinity equals 2"
+        latex = "x - \\infty = 2"
+        self.verify(saytex, latex)
 
 
 if __name__ == '__main__':
