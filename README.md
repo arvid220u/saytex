@@ -3,10 +3,6 @@ Speak math, get LaTeX!
 
 SayTeX is a tool for converting spoken math into LaTeX equations.
 
-## Installation
-
-The `saytex` package maybe depends on `setuptools`, since it uses `pkg_resources`. It is unclear though.
-
 ## Structural Overview
 
 As it currently stands, SayTeX consists of three parts operating somewhat independently:
@@ -23,6 +19,16 @@ Ideally, part two should not be necessary. However, as long as SayTeX continues 
 - [ ] Enable users to modify the output and store the modified result, so as to build up a database of correct mappings between speech and LaTeX that can later be used for e.g. machine learning.
 - [ ] Use a customized version of the Microsoft Speech API that is adapted to the SayTeX Syntax.
 - [ ] Integrate SayTeX with tools that are currently used by visually impaired students, to enable them to more easily typeset math formulas.
+
+## Deploying
+
+Build the package: `python3 setup.py sdist bdist_wheel`.
+
+Upload it to PyPI: `twine upload dist/*`.
+
+## Installation
+
+Install it using PyPI: `pip3 install saytex`.
 
 ## About
 
