@@ -26,8 +26,7 @@ The layer_priorities is a dictionary mapping layer ids to a number, reflecting
 the in which order the layers should be executed. Layers are executed from low
 to high priority. Layers with the same priority can be executed in any order; the
 idea is that such layers are independent of each other. In designing new layers,
-one should strive for not adding a new priority level. When disabling a layer,
-remove
+one should strive for not adding a new priority level.
 """
 layer_priorities = {
     "speech_recognition_error_correction": 0,
