@@ -2,9 +2,15 @@
 Defines the base layer interface to be used by all layers.
 """
 
-from . import *
+import saytex.config
 
 import re
+
+class InvalidLayerAccess(Exception):
+    """
+    Raised in SaytexLayer.get_layer if someone tries to access an invalid layer.
+    """
+    pass
 
 class SaytexLayer:
 
@@ -16,7 +22,13 @@ class SaytexLayer:
         :param layer_id: str, representing the layer to create.
         :return: a SaytexLayer object, representing a particular layer
         """
-        return layer_id_to_class[layer_id]()
+        if layer_id not in saytex.config.layer_id_to_class:
+            raise InvalidLayerAccess("The layer_id " + layer_id + " is not in layer_id_to_class.")
+        layer_class = saytex.config.layer_id_to_class[layer_id]
+        if layer_class == None:
+            raise InvalidLayerAccess
+        # no errors, so initialize it!
+        return layer_class()
     
 
     def execute_layer(self, input_string):

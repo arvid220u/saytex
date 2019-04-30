@@ -5,11 +5,13 @@ import doctest
 
 from saytex import Saytex, UnrecognizableSaytexInput
 
+import saytex.layers
+
 class TestSpeechRecognitionErrorDetection(unittest.TestCase):
 
     def setUp(self):
-        self.layer = saytex.SpeechRecognitionErrorDetection()
-    
+        self.layer = saytex.layers.SaytexLayer.get_layer("speech_recognition_error_correction")
+
     def verify(self, inp, oup):
         computed_output = self.layer.execute_layer(inp)
         self.assertEqual(computed_output, oup)
