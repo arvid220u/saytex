@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="saytex",
+    name="SayTeX",
     version="0.0.1",
     author="Arvid Lunnemark",
     author_email="arvid.lunnemark@gmail.com",
