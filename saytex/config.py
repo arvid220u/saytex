@@ -41,13 +41,13 @@ layer_priorities = {
 }
 
 
-import saytex.layers
+from saytex.layers.speech_recognition_error_correction import SpeechRecognitionErrorCorrection
 """
 The layer_id_to_class dictionary contains a mapping from a string identifying
 a layer to the class implementing the layer. The string is used in config.py.
 """
 layer_id_to_class = {
-    "speech_recognition_error_correction": saytex.layers.speech_recognition_error_correction.SpeechRecognitionErrorCorrection,
+    "speech_recognition_error_correction": SpeechRecognitionErrorCorrection,
     "capitalization": None,
     "spoken_number_recognition": None,
     "synonym_standardization": None,
