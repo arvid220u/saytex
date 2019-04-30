@@ -83,6 +83,10 @@ class TestToLatex(unittest.TestCase):
         latex = "x - \\infty = 2"
         self.verify(saytex, latex)
 
+    def test_10(self):
+        saytex = "capital a plus b equals five minus capital omega"
+        latex = r'A + b = 5 - \Omega'
+        self.verify(saytex, latex)
 
 if __name__ == '__main__':
     res = unittest.main(verbosity=3, exit=False)
