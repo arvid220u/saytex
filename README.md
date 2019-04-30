@@ -30,6 +30,8 @@ Upload it to PyPI: `twine upload dist/*`.
 
 Install it using PyPI: `pip3 install saytex`.
 
+To install the local version, and keep it updated, use `pip3 install -e .`.
+
 ## About
 
 SayTeX is currently developed as a research project by Arvid Lunnemark, under the supervision of Dr. Kyle Keane within the Department of Materials Science in the Interactive Materials Education Laboratory at MIT. The research proposals can be found in the folder `research-proposals`.
