@@ -49,17 +49,19 @@ class SaytexSyntax:
     def to_latex(self, saytex_string, word_list = None, word_index = 0, dp_memo = None, next_params = {}):
         """
         Converts SayTeX Syntax into LaTeX code.
+
         :param saytex_string: A string containing valid SayTeX Syntax code.
         :param word_list (optional): A list of tokenized words derived from saytex_string.
-        If word_list is not None, then the saytex_string will be ignored. Is normally only used
-        for recursive calls.
+            If word_list is not None, then the saytex_string will be ignored. Is normally only used
+            for recursive calls.
         :param word_index: The current index in the word_list that we are at. Used in recursive calls.
-        If it is not valid SayTeX Syntax, a SaytexSyntaxError will be raised.
+            If it is not valid SayTeX Syntax, a SaytexSyntaxError will be raised.
         :param dp_memo: A dictionary mapping indices in the word_list to generated LaTeX strings.
         :param next_params: A dictionary of parameters to be passed to the next get_latex call.
+        
         :return: A string containing a valid translation of the input string into LaTeX (if no exception).
-        If word_index > 0, the return value is a tuple (string, value) where value is a measure of
-        how good the string is as a LaTeX translation of saytex_string.
+            If word_index > 0, the return value is a tuple (string, value) where value is a measure of
+            how good the string is as a LaTeX translation of saytex_string.
         """
 
         # main idea: iterate recursively, and employ a DP strategy
@@ -222,7 +224,10 @@ class SaytexSyntax:
     
     def is_valid_saytex_syntax(self, potential_saytex_string):
         """
+        Determines if a string is valid SayTeX Syntax or not.
+
         :param potential_saytex_string: str, potentially conforming to SayTeX syntax
+        
         :return: bool, indicating whether the str actually conforms to SayTeX syntax or not
         """
         # split by space

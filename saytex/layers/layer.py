@@ -19,7 +19,9 @@ class SaytexLayer:
     def get_layer(cls, layer_id):
         """
         Creates a new layer of the layer_id subclass.
+
         :param layer_id: str, representing the layer to create.
+
         :return: a SaytexLayer object, representing a particular layer
         """
         if layer_id not in saytex.config.layer_id_to_class:
@@ -34,7 +36,9 @@ class SaytexLayer:
     def execute_layer(self, input_string):
         """
         To be overridden in a layer subclass.
+
         :param input_string: str, the input
+
         :return: str, the output of the layer
         """
         return NotImplementedError
@@ -44,9 +48,11 @@ class SaytexLayer:
     def replace_words(self, word_tuples, input_string):
         """
         Replaces words in input_string using the word_tuples.
+
         :param word_tuples: a list of tuples of two strings, where the first one 
             is the word to be replaced and the second one is the word to replace it with
-        :input_string: str
+        :param input_string: str
+        
         :return: str, with words replaced
         """
         in_progress_string = input_string

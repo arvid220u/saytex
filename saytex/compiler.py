@@ -38,13 +38,15 @@ class Saytex:
     def to_latex(self, math_string):
         """
         Converts natural language into LaTeX code.
+
         :param math_string: A string containing a spoken math expression. The
-        string should use the SayTeX+ format, which is a superset of
-        SayTeX Syntax.
+            string should use the SayTeX+ format, which is a superset of
+            SayTeX Syntax.
+
         :return: A string containing a valid translation of the input string
-        to LaTeX code. If the string does not conform to SayTeX+ (which
-        can only happen if it uses unallowed characters), the
-        InvalidSaytexPlus exception will be raised.
+            to LaTeX code. If the string does not conform to SayTeX+ (which
+            can only happen if it uses unallowed characters), the
+            InvalidSaytexPlus exception will be raised.
         """
         
         # convert into saytex
@@ -58,13 +60,15 @@ class Saytex:
     def to_saytex(self, math_string):
         """
         Converts natural language into SayTeX Syntax.
+        
         :param math_string: A string containing a spoken math expression. The
-        string should use the SayTeX+ format, which is a superset of
-        SayTeX Syntax.
+            string should use the SayTeX+ format, which is a superset of
+            SayTeX Syntax.
+
         :return: A string containing a valid translation of the input string
-        to SayTeX Syntax. If the string is not recognizable (that is, it
-        cannot be converted into SayTeX), the UnrecognizableSaytexInput exception 
-        is thrown.
+            to SayTeX Syntax. If the string is not recognizable (that is, it
+            cannot be converted into SayTeX), the UnrecognizableSaytexInput exception 
+            is thrown.
         """
 
         # the idea is to use a layering approach, where the string goes through
