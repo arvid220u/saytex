@@ -33,7 +33,6 @@ class SpeechRecognitionErrorCorrectionLayer(SaytexLayer):
 
     common_mischaracterizations_aggressive = [
         ('some','sum'),
-        ('end','n'),
         ('be','b'),
         ("I'm",'n'),
         ('sign','sine'),
