@@ -98,6 +98,10 @@ class TestToLatex(unittest.TestCase):
         # NOTE: this is probably not the behavior we want
         self.verify(saytex, latex)
 
+    def test_16(self):
+        saytex = "5 plus     3 plus     8"
+        latex = "5 + 3 + 8"
+        self.verify(saytex, latex)
 
 
 if __name__ == '__main__':
