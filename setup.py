@@ -19,7 +19,8 @@ setuptools.setup(
     )),
     packages=setuptools.find_packages(),
     package_data={
-        'saytex.saytexsyntax': ['saytex_dictionary/*.json']
+        'saytex.saytexsyntax': ['saytex_dictionary/*.json'],
+        'saytex.layers': ['synonym_standardization_dictionary.json']
     },
     classifiers=[
         "Programming Language :: Python :: 3",
