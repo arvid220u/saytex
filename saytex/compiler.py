@@ -13,7 +13,8 @@ from .layers import SaytexLayer
 
 class UnrecognizableSaytexInput(Exception):
     """
-    Raised in to_latex and to_saytex, if the input cannot be transformed into valid SayTeX Syntax.
+    Raised in to_latex and to_saytex, if the input cannot be transformed 
+    into valid SayTeX Syntax.
     """
     pass
 
@@ -61,9 +62,9 @@ class Saytex:
         string should use the SayTeX+ format, which is a superset of
         SayTeX Syntax.
         :return: A string containing a valid translation of the input string
-        to SayTeX Syntax. If the string does not conform to SayTeX+ (which
-        can only happen if it uses unallowed characters), the
-        InvalidSaytexPlus exception will be raised.
+        to SayTeX Syntax. If the string is not recognizable (that is, it
+        cannot be converted into SayTeX), the UnrecognizableSaytexInput exception 
+        is thrown.
         """
 
         # the idea is to use a layering approach, where the string goes through
@@ -72,11 +73,11 @@ class Saytex:
         # in_progress_string contains the string as it is being converted into saytex
         in_progress_string = math_string
 
-        # go through all layers to transform the string, in their
-        # order of priority
+        # get all layers that should be used
         layers = [layer for layer in config.used_layers if config.used_layers[layer]]
 
         # sort the layers by priority
+        # lowest priority comes first (yes, i know, not ideal naming there)
         layers.sort(key = lambda layer_id : config.layer_priorities[layer_id])
 
         # now apply the layers
@@ -84,6 +85,8 @@ class Saytex:
             layer = SaytexLayer.get_layer(layer_id)
             in_progress_string = layer.execute_layer(in_progress_string)
 
+        # the string that is the result of all layer executions
         saytex_syntax = in_progress_string
 
+        # return the saytex syntax
         return saytex_syntax
