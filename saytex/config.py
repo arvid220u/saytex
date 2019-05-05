@@ -13,7 +13,7 @@ used_layers = {
     "speech_recognition_error_correction": True,
     "capitalization": True,
     "spoken_number_recognition": True,
-    "synonym_standardization": False,
+    "synonym_standardization": True,
     "from_to_recognition": False,
     "divided_by_recognition": False,
     "auto_completion_to_avoid_compile_errors": False,
@@ -43,6 +43,7 @@ layer_priorities = {
 from saytex.layers.speech_recognition_error_correction import SpeechRecognitionErrorCorrectionLayer
 from saytex.layers.capitalization import CapitalizationLayer
 from saytex.layers.spoken_number_recognition import SpokenNumberRecognitionLayer
+from saytex.layers.synonym_standardization import SynonymStandardizationLayer
 """
 The layer_id_to_class dictionary contains a mapping from a string identifying
 a layer to the class implementing the layer. The string is used in config.py.
@@ -51,7 +52,7 @@ layer_id_to_class = {
     "speech_recognition_error_correction": SpeechRecognitionErrorCorrectionLayer,
     "capitalization": CapitalizationLayer,
     "spoken_number_recognition": SpokenNumberRecognitionLayer,
-    "synonym_standardization": None,
+    "synonym_standardization": SynonymStandardizationLayer,
     "from_to_recognition": None,
     "divided_by_recognition": None,
     "auto_completion_to_avoid_compile_errors": None,

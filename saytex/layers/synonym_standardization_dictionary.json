@@ -1,0 +1,82 @@
+[
+    {
+        "from": ["divided by"],
+        "to": "over"
+    },
+    {
+        "from": ["multiplied by", "times"],
+        "to": "centered dot"
+    },
+    {
+        "from": ["to the power of", "raised to"],
+        "to": "superscript"
+    },
+    {
+        "from": ["integrate"],
+        "to": "integral"
+    },
+    {
+        "from": ["reals"],
+        "to": "real numbers"
+    },
+    {
+        "from": ["squared"],
+        "to": "superscript 2"
+    },
+    {
+        "from": ["cubed"],
+        "to": "superscript 3"
+    },
+    {
+        "from": ["tan"],
+        "to": "tangent"
+    },
+    {
+        "from": ["plus minus"],
+        "to": "plus or minus"
+    },
+    {
+        "from": ["minus plus"],
+        "to": "minus or plus"
+    },
+    {
+        "from": ["sub"],
+        "to": "subscript"
+    },
+    {
+        "from": ["intersect","cap","intersected with"],
+        "to": "intersection"
+    },
+    {
+        "from": ["unioned with","cup"],
+        "to": "union"
+    },
+    {
+        "from": ["open"],
+        "to": "left parenthesis"
+    },
+    {
+        "from": ["close"],
+        "to": "right parenthesis"
+    },
+    {
+        "from": ["is equal to","equal to"],
+        "to": "equals"
+    },
+    {
+        "from": ["curly bracket"],
+        "to": "brace"
+    },
+    {
+        "from": ["not equal to","does not equal"],
+        "to": "is not equal to"
+    },
+    {
+        "from": ["less than"],
+        "to": "is less than"
+    },
+    {
+        "from": ["greater than"],
+        "to": "is greater than"
+    }
+]
