@@ -20,11 +20,17 @@ Ideally, part two should not be necessary. However, as long as SayTeX continues 
 - [ ] Use a customized version of the Microsoft Speech API that is adapted to the SayTeX Syntax.
 - [ ] Integrate SayTeX with tools that are currently used by visually impaired students, to enable them to more easily typeset math formulas.
 
-## Deploying
+## Developing
+
+### Deploying
 
 Build the package: `python3 setup.py sdist bdist_wheel`.
 
 Upload it to PyPI: `twine upload dist/*`.
+
+### Docs
+
+Install sphinx: `pip3 install sphinx`
 
 ## Installation
 
