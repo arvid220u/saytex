@@ -219,7 +219,31 @@ class SaytexSyntax:
 
 
 
-                
+    
+    def is_valid_saytex_syntax(self, potential_saytex_string):
+        """
+        :param potential_saytex_string: str, potentially conforming to SayTeX syntax
+        :return: bool, indicating whether the str actually conforms to SayTeX syntax or not
+        """
+        # split by space
+        word_list = potential_saytex_string.split()
+        # verify that every word is either a number, or a word using the set of allowed characters
+        for word in word_list:
+            # numbers are allowed
+            try:
+                float(word)
+                continue
+            except ValueError:
+                pass
+            # words must use allowed characters
+            is_allowed = True
+            for c in word:
+                if c not in config.ALLOWED_CHARACTERS_IN_SAYTEX_WORD:
+                    is_allowed = False
+                    break
+            if not is_allowed:
+                return False
+        return True
 
 
         

@@ -88,5 +88,9 @@ class Saytex:
         # the string that is the result of all layer executions
         saytex_syntax = in_progress_string
 
+        # verify that it does conform to saytex syntax
+        if not self.saytex_syntax_compiler.is_valid_saytex_syntax(saytex_syntax):
+            raise UnrecognizableSaytexInput("The string '" + math_string + "' was converted into the string '" + saytex_syntax + "', which does not conform to SayTeX Syntax.")
+
         # return the saytex syntax
         return saytex_syntax
