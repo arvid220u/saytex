@@ -92,6 +92,21 @@ class TestToLatex(unittest.TestCase):
         saytex = "integral from 0 to open n plus 1 close x dx"
         latex = "\\int_0^{\\left( n + 1 \\right)} x dx"
         self.verify(saytex, latex)
+    
+    def test_12(self):
+        saytex = "a divided by b"
+        latex = r"\frac{a}{b}"
+        self.verify(saytex, latex)
+    
+    def test_13(self):
+        saytex = "a plus 1 divided by b"
+        latex = r"a + \frac{1}{b}"
+        self.verify(saytex, latex)
+    
+    def test_14(self):
+        saytex = "open a plus 1 close over b"
+        latex = r"\frac{a}{b}"
+        self.verify(saytex, latex)
 
 if __name__ == '__main__':
     res = unittest.main(verbosity=3, exit=False)
