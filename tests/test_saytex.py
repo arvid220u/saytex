@@ -70,7 +70,7 @@ class TestToLatex(unittest.TestCase):
 
     def test_07(self):
         saytex = "integral from 0 to infinity minus a subscript b"
-        latex = "\\int_0^\\infty - a_b"
+        latex = "\\int_0^{\\infty} - a_b"
         self.verify(saytex, latex)
     
     def test_08(self):
@@ -86,6 +86,11 @@ class TestToLatex(unittest.TestCase):
     def test_10(self):
         saytex = "capital a plus b equals five minus capital omega"
         latex = r'A + b = 5 - \Omega'
+        self.verify(saytex, latex)
+    
+    def test_11(self):
+        saytex = "integral from 0 to open n plus 1 close x dx"
+        latex = "\\int_0^{\\left( n + 1 \\right)} x dx"
         self.verify(saytex, latex)
 
 if __name__ == '__main__':
