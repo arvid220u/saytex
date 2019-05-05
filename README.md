@@ -32,6 +32,8 @@ Upload it to PyPI: `twine upload dist/*`.
 
 Install sphinx: `pip3 install sphinx`
 
+To update the docs, run `sphinx-apidoc -o . ../saytex -f` followed by `make html`.
+
 ## Installation
 
 Install it using PyPI: `pip3 install saytex`.
