@@ -3,6 +3,7 @@
 
 used_layers = {
     "speech_recognition_error_correction": True,
+    "case_insensitivity": True,
     "capitalization": True,
     "spoken_number_recognition": True,
     "synonym_standardization": True,
@@ -25,6 +26,7 @@ should be updated.
 
 layer_priorities = {
     "speech_recognition_error_correction": 0,
+    "case_insensitivity": 0,
     "capitalization": 1,
     "spoken_number_recognition": 1,
     "synonym_standardization": 1,
@@ -48,10 +50,11 @@ from saytex.layers.spoken_number_recognition import SpokenNumberRecognitionLayer
 from saytex.layers.synonym_standardization import SynonymStandardizationLayer
 from saytex.layers.from_to_recognition import FromToRecognitionLayer
 from saytex.layers.divided_by_recognition import DividedByRecognitionLayer
-
+from saytex.layers.case_insensitivity import CaseInsensitivityLayer
 
 layer_id_to_class = {
     "speech_recognition_error_correction": SpeechRecognitionErrorCorrectionLayer,
+    "case_insensitivity": CaseInsensitivityLayer,
     "capitalization": CapitalizationLayer,
     "spoken_number_recognition": SpokenNumberRecognitionLayer,
     "synonym_standardization": SynonymStandardizationLayer,

@@ -107,6 +107,11 @@ class TestToLatex(unittest.TestCase):
         saytex = "open a plus 1 close over b"
         latex = r"\frac{a}{b}"
         self.verify(saytex, latex)
+    
+    def test_15(self):
+        saytex = "A plus B minus c"
+        latex = "a + b - c"
+        self.verify(saytex,latex)
 
 if __name__ == '__main__':
     res = unittest.main(verbosity=3, exit=False)
