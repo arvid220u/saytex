@@ -5,6 +5,8 @@ Development
 Deploying
 ---------
 
+Update the version number in ``setup.py``.
+
 Build the package: ``python3 setup.py sdist bdist_wheel``.
 
 Upload it to PyPI: ``twine upload --skip-existing dist/*``.
