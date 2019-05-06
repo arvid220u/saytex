@@ -12,6 +12,14 @@ saytex.layers.capitalization module
     :undoc-members:
     :show-inheritance:
 
+saytex.layers.case\_insensitivity module
+----------------------------------------
+
+.. automodule:: saytex.layers.case_insensitivity
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 saytex.layers.divided\_by\_recognition module
 ---------------------------------------------
 
