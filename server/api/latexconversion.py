@@ -4,7 +4,7 @@ import urllib
 import re
 import config
 
-import latexengine
+from saytex import Saytex
 
 # used in all APIs
 special_vocabulary = [
@@ -147,7 +147,7 @@ def wolframlatex(text):
 
 def simplelatex(text):
     """
-    convert text to latex using fast method (no external API)
+    convert text to latex using the saytex package
 
     parameters:
         text: unprocessed spoken string
@@ -155,24 +155,9 @@ def simplelatex(text):
     returns:
         latex string
     """
+    saytex_compiler = Saytex()
 
-    # aggressively preprocess
-    preprocessed = aggressive_preprocess(text)
-
-    # preprocess string
-    preprocessed = preprocess(preprocessed)
-
-    # aggressively preprocess
-    preprocessed = aggressive_preprocess(preprocessed)
-
-    # do the lineareval
-    latex = latexengine.runengine(preprocessed)
-
-    # determine if latex is well-formed latex
-    # huh
-    # could check for occurrence of long word, for example
-
-    return latex
+    return saytex_compiler.to_latex(text)
 
 
 # helper methods
