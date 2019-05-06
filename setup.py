@@ -14,7 +14,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://saytex.xyz",
     project_urls=OrderedDict((
-        ('Documentation', 'http://saytex.xyz/docs'),
+        ('Documentation', 'https://saytex.readthedocs.io'),
         ('Code', 'https://github.com/arvid220u/saytex')
     )),
     packages=setuptools.find_packages(),
