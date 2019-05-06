@@ -8,7 +8,7 @@ used_layers = {
     "spoken_number_recognition": True,
     "synonym_standardization": True,
     "from_to_recognition": True,
-    "divided_by_recognition": False,
+    "divided_by_recognition": True,
     "auto_completion_to_avoid_compile_errors": False,
     "prettification": False
 }

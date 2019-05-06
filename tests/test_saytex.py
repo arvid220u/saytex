@@ -105,7 +105,7 @@ class TestToLatex(unittest.TestCase):
     
     def test_14(self):
         saytex = "open a plus 1 close over b"
-        latex = r"\frac{a}{b}"
+        latex = r"\frac{a + 1}{b}"
         self.verify(saytex, latex)
     
     def test_15(self):
