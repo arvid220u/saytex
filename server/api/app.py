@@ -82,12 +82,12 @@ def fastapi(text):
         latex code
     """
 
-    #try:
-    # convert using simple method
-    latex = latexconversion.simplelatex(text)
-    """except:
+    try:
+        latex = latexconversion.simplelatex(text)
+    except:
         # return an error
-        return Response('String could not be converted into LaTeX.', status=400)"""
+        #return Response('String could not be converted into LaTeX.', status=400)
+        return "\\text{error}"
 
     return latex
 
