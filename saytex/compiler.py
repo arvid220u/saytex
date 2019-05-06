@@ -20,10 +20,10 @@ class UnrecognizableSaytexInput(Exception):
 
 class Saytex:
     """
-    Contains the method to_latex to convert from natural
+    Contains the method ``to_latex`` to convert from natural
     language to LaTeX. It will do this by invoking the layers
-    defined in config.py in the specified order, followed by a
-    final call to SaytexSyntax. The method to_saytex will do the
+    defined in ``config.py`` in the specified order, followed by a
+    final call to SaytexSyntax. The method ``to_saytex`` will do the
     same thing, without the call to SaytexSyntax.
     """
 
@@ -38,13 +38,16 @@ class Saytex:
     def to_latex(self, math_string):
         """
         Converts natural language into LaTeX code.
+
         :param math_string: A string containing a spoken math expression. The
-        string should use the SayTeX+ format, which is a superset of
-        SayTeX Syntax.
+            string must be recognizable to SayTeX, of which the specifics depend
+            on the particular layers that are used. The set of all recognizable
+            SayTeX strings is a superset of SayTeX Syntax.
+
         :return: A string containing a valid translation of the input string
-        to LaTeX code. If the string does not conform to SayTeX+ (which
-        can only happen if it uses unallowed characters), the
-        InvalidSaytexPlus exception will be raised.
+            to LaTeX code. If the string does not conform to SayTeX+ (which
+            can only happen if it uses unallowed characters), the
+            InvalidSaytexPlus exception will be raised.
         """
         
         # convert into saytex
@@ -58,13 +61,15 @@ class Saytex:
     def to_saytex(self, math_string):
         """
         Converts natural language into SayTeX Syntax.
+        
         :param math_string: A string containing a spoken math expression. The
-        string should use the SayTeX+ format, which is a superset of
-        SayTeX Syntax.
+            string should use the SayTeX+ format, which is a superset of
+            SayTeX Syntax.
+
         :return: A string containing a valid translation of the input string
-        to SayTeX Syntax. If the string is not recognizable (that is, it
-        cannot be converted into SayTeX), the UnrecognizableSaytexInput exception 
-        is thrown.
+            to SayTeX Syntax. If the string is not recognizable (that is, it
+            cannot be converted into SayTeX), the UnrecognizableSaytexInput exception 
+            is thrown.
         """
 
         # the idea is to use a layering approach, where the string goes through

@@ -34,17 +34,19 @@ class SynonymStandardizationLayer(SaytexLayer):
     def convert_synonyms(self, saytex_string, word_list = None, word_index = 0, dp_memo = None):
         """
         Converts SayTeX Syntax into LaTeX code.
+
         :param saytex_string: A string containing valid SayTeX Syntax code.
         :param word_list (optional): A list of tokenized words derived from saytex_string.
-        If word_list is not None, then the saytex_string will be ignored. Is normally only used
-        for recursive calls.
+            If word_list is not None, then the saytex_string will be ignored. Is normally only used
+            for recursive calls.
         :param word_index: The current index in the word_list that we are at. Used in recursive calls.
-        If it is not valid SayTeX Syntax, a SaytexSyntaxError will be raised.
+            If it is not valid SayTeX Syntax, a SaytexSyntaxError will be raised.
         :param dp_memo: A dictionary mapping indices in the word_list to generated LaTeX strings.
         :param next_params: A dictionary of parameters to be passed to the next get_latex call.
+        
         :return: A string containing a valid translation of the input string into LaTeX (if no exception).
-        If word_index > 0, the return value is a tuple (string, value) where value is a measure of
-        how good the string is as a LaTeX translation of saytex_string.
+            If word_index > 0, the return value is a tuple (string, value) where value is a measure of
+            how good the string is as a LaTeX translation of saytex_string.
         """
 
         # initialize dp_memo
@@ -231,8 +233,10 @@ class SynonymStandardizationDictionary:
         Returns the corresponding latex code for saytex, and None if saytex
         is an invalid command. The latex code will be space padded according
         to the value in the dictionary.
+        
         :param saytex: str, containing a potential saytex command
         :param params: dict, containing params to be passed to post_process_latex
+        
         :return: a post processed str, or None if saytex is not a valid command
         """
         try:
@@ -246,7 +250,9 @@ class SynonymStandardizationDictionary:
         """
         Returns a syntax entry corresponding to saytex, if exists.
         Otherwise, raises KeyError.
+        
         :param saytex: str, containing a potential saytex command
+        
         :return: a dictionary in self.syntax_list
         """
         if word not in self.syntax_dictionary:

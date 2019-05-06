@@ -172,12 +172,11 @@ def makeword(s):
 def findmatching(s,pos,w1='left parenthesis',w2='right parenthesis'):
     """
     Find matching parantheses.
-    params:
-        s: string, to be searched in
-        pos: int, position of ( we want to find a match for
-    returns:
-        int, position of matching ) bracket
-        - if there is no match, return len(s)
+    
+    :param s: string, to be searched in
+    :param pos: int, position of ( we want to find a match for
+    
+    :return: int, position of matching ) bracket; if there is no match, return len(s)
     """
     count = 1
     ps = pos + 1
