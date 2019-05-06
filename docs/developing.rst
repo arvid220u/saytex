@@ -9,7 +9,7 @@ Build the package: ``python3 setup.py sdist bdist_wheel``.
 
 Upload it to PyPI: ``twine upload --skip-existing dist/*``.
 
-Then, make a new release on GitHub, where the binaries from `dist/` are uploaded.
+Then, make a new release on GitHub, where the binaries from ``dist/`` are uploaded.
 
 Documentation
 -------------
