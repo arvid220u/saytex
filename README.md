@@ -1,7 +1,7 @@
 # SayTeX
 Speak math, get LaTeX!
 
-SayTeX is a tool for converting spoken math into LaTeX equations.
+SayTeX is a tool for converting spoken math into LaTeX equations. Read the documentation at https://saytex.readthedocs.io.
 
 ## Structural Overview
 
