@@ -29,6 +29,8 @@ class SpeechRecognitionErrorCorrectionLayer(SaytexLayer):
         ('menace','minus'),
         ('age','h'),
         ('why','y'),
+        ('acts','x'),
+        ('and','end')
     ]
 
     common_mischaracterizations_aggressive = [
