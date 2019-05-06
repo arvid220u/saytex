@@ -13,7 +13,6 @@ class DividedByRecognitionLayer(SaytexLayer):
         """
         Transforms "a over b" into "fraction begin a end begin b end".
         """
-        in_progress_string = input_string
 
         # simple implementation: just take previous word.
 
