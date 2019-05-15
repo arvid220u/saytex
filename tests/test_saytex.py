@@ -75,7 +75,7 @@ class TestToLatex(unittest.TestCase):
     
     def test_08(self):
         saytex = "integral from 0 to begin n plus 1 end x dx"
-        latex = "\\int_0^{n + 1} x dx"
+        latex = "\\int_0^{n + 1} x \\, dx"
         self.verify(saytex, latex)
     
     def test_09(self):
@@ -90,7 +90,7 @@ class TestToLatex(unittest.TestCase):
     
     def test_11(self):
         saytex = "integral from 0 to open n plus 1 close x dx"
-        latex = "\\int_0^{\\left( n + 1 \\right)} x dx"
+        latex = "\\int_0^{\\left( n + 1 \\right)} x \\, dx"
         self.verify(saytex, latex)
     
     def test_12(self):
@@ -120,7 +120,7 @@ class TestToLatex(unittest.TestCase):
     
     def test_17(self):
         saytex = "f of x equals integral of t squared from zero to x dt"
-        latex = "f \\left( x \\right) = \\int_0^{x} t^2 dt"
+        latex = "f \\left( x \\right) = \\int_0^{x} t^2 \\, dt"
         self.verify(saytex,latex)
 
 if __name__ == '__main__':

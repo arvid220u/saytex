@@ -11,7 +11,7 @@ used_layers = {
     "from_to_recognition": True,
     "divided_by_recognition": True,
     "auto_completion_to_avoid_compile_errors": False,
-    "prettification": False
+    "prettification": True
 }
 """
 The used_layers is a dictionary indicating which layers are to be used by SayTeX in
@@ -54,6 +54,7 @@ from saytex.layers.handle_of import HandleOfLayer
 from saytex.layers.from_to_recognition import FromToRecognitionLayer
 from saytex.layers.divided_by_recognition import DividedByRecognitionLayer
 from saytex.layers.case_insensitivity import CaseInsensitivityLayer
+from saytex.layers.prettification import PrettificationLayer
 
 layer_id_to_class = {
     "speech_recognition_error_correction": SpeechRecognitionErrorCorrectionLayer,
@@ -65,7 +66,7 @@ layer_id_to_class = {
     "from_to_recognition": FromToRecognitionLayer,
     "divided_by_recognition": DividedByRecognitionLayer,
     "auto_completion_to_avoid_compile_errors": None,
-    "prettification": None
+    "prettification": PrettificationLayer
 }
 """
 The layer_id_to_class dictionary contains a mapping from a string identifying
