@@ -117,6 +117,11 @@ class TestToLatex(unittest.TestCase):
         saytex = "f of x equals x squared"
         latex = "f \\left( x \\right) = x^2"
         self.verify(saytex,latex)
+    
+    def test_17(self):
+        saytex = "f of x equals integral of t squared from zero to x dt"
+        latex = "f \\left( x \\right) = \\int_0^{x} t^2 dt"
+        self.verify(saytex,latex)
 
 if __name__ == '__main__':
     res = unittest.main(verbosity=3, exit=False)
