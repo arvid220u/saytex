@@ -113,5 +113,10 @@ class TestToLatex(unittest.TestCase):
         latex = "a + b - c"
         self.verify(saytex,latex)
 
+    def test_16(self):
+        saytex = "f of x equals x squared"
+        latex = "f \\left( x \\right) = x^2"
+        self.verify(saytex,latex)
+
 if __name__ == '__main__':
     res = unittest.main(verbosity=3, exit=False)

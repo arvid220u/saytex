@@ -7,6 +7,7 @@ used_layers = {
     "capitalization": True,
     "spoken_number_recognition": True,
     "synonym_standardization": True,
+    "handle_of": True,
     "from_to_recognition": True,
     "divided_by_recognition": True,
     "auto_completion_to_avoid_compile_errors": False,
@@ -30,6 +31,7 @@ layer_priorities = {
     "capitalization": 1,
     "spoken_number_recognition": 1,
     "synonym_standardization": 1,
+    "handle_of": 2,
     "from_to_recognition": 2, # this is debatable, but it kind of depends on the capitalization layer
     "divided_by_recognition": 2,
     "auto_completion_to_avoid_compile_errors": 3,
@@ -48,6 +50,7 @@ from saytex.layers.speech_recognition_error_correction import SpeechRecognitionE
 from saytex.layers.capitalization import CapitalizationLayer
 from saytex.layers.spoken_number_recognition import SpokenNumberRecognitionLayer
 from saytex.layers.synonym_standardization import SynonymStandardizationLayer
+from saytex.layers.handle_of import HandleOfLayer
 from saytex.layers.from_to_recognition import FromToRecognitionLayer
 from saytex.layers.divided_by_recognition import DividedByRecognitionLayer
 from saytex.layers.case_insensitivity import CaseInsensitivityLayer
@@ -58,6 +61,7 @@ layer_id_to_class = {
     "capitalization": CapitalizationLayer,
     "spoken_number_recognition": SpokenNumberRecognitionLayer,
     "synonym_standardization": SynonymStandardizationLayer,
+    "handle_of": HandleOfLayer,
     "from_to_recognition": FromToRecognitionLayer,
     "divided_by_recognition": DividedByRecognitionLayer,
     "auto_completion_to_avoid_compile_errors": None,
