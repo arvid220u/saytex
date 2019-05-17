@@ -10,7 +10,7 @@ import saytex.layers
 class TestSpeechRecognitionErrorDetection(unittest.TestCase):
 
     def setUp(self):
-        self.layer = saytex.layers.SaytexLayer.get_layer("speech_recognition_error_correction")
+        self.layer = saytex.layers.speech_recognition_error_correction.SpeechRecognitionErrorCorrectionLayer()
 
     def verify(self, inp, oup):
         computed_output = self.layer.execute_layer(inp)

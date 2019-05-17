@@ -164,6 +164,8 @@ class FromToRecognitionLayer(SaytexLayer):
 
         newstring = newstring + endstring
 
+        newstring = " ".join([x for x in newstring.split(" ") if x != ""])
+
         return newstring
 
 def makeword(s):

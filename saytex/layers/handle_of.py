@@ -33,7 +33,7 @@ class HandleOfLayer(SaytexLayer):
             # TODO: recognize other constructs, such as "integral from 0 to infinity of x"
             # now, only "integral of x from 0 to infinity" would be properly recognized,
             # which is unfortunate
-            if precedingstring.endswith('integral ') or precedingstring.endswith('sum '):
+            if precedingstring.endswith('integral ') or precedingstring.endswith('sum ') or precedingstring.endswith('end '):
                 # remove the of
                 # and remove extra space
                 in_progress_string = precedingstring.rstrip() + followingstring

@@ -100,4 +100,7 @@ class SpokenNumberRecognitionLayer(SaytexLayer):
             output_string += " " + str(dnm)
             innumber = False
 
+        # the output string will start with a space, which we don't want
+        output_string = output_string.lstrip(" ")
+
         return output_string
