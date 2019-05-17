@@ -124,10 +124,8 @@
 
 
     // An enum containing the URL paths for the Latex API
-    var LatexAPIURLs = {
-        FAST: '{{ api_url }}' + '/fast/',
-        FULL: '{{ api_url }}' + '/full/',
-    };
+    var LatexAPIURL = '{{ api_url }}' + '/latex/';
+    var SaytexAPIURL = '{{ api_url }}' + '/saytex/'
     function callLatexAPI(apiurl, text, rawfield, displayfield) {
         /*
         Calls the LaTeX API.
@@ -210,7 +208,8 @@
                 ncurtext = text;
 
                 // call the fast API!
-                callLatexAPI(LatexAPIURLs.FAST, text, fastRawLatexField, fastDisplayLatexField);
+                callLatexAPI(LatexAPIURL, text, fastRawLatexField, fastDisplayLatexField);
+                callLatexAPI(SaytexAPIURL, text, fastRawLatexField, fullDisplayLatexField);
             };
             recognizer.recognized = function (r, ev) {
                 console.log('recognized!');
@@ -224,7 +223,7 @@
                 console.log(curtext);
 
                 // call the full API!
-                callLatexAPI(LatexAPIURLs.FULL, curtext, fullRawLatexField, fullDisplayLatexField);
+                //callLatexAPI(LatexAPIURLs.FULL, curtext, fullRawLatexField, fullDisplayLatexField);
             };
 
 
@@ -271,7 +270,7 @@
 
                     // call the full API!
                     // use the ncurtext since that contains the most recent version
-                    callLatexAPI(LatexAPIURLs.FULL, ncurtext, fullRawLatexField, fullDisplayLatexField);
+                    //callLatexAPI(LatexAPIURLs.FULL, ncurtext, fullRawLatexField, fullDisplayLatexField);
                     
                 },
                 function (err) {
