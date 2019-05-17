@@ -72,7 +72,7 @@ class DividedByRecognitionLayer(SaytexLayer):
             if startindex > 0:
                 #print(words[startindex-1])
                 if words[startindex-1] not in self.saytex_syntax_operators():
-                    startindex = startindex - 1
+                    return self.find_associativity_left(words, startindex)
             
             return startindex
         

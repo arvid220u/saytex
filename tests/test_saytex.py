@@ -167,6 +167,12 @@ class TestToLatex(unittest.TestCase):
         saytex = "sum from n equals one to infinity one over n squared equals pi squared over six"
         latex = r'\sum_{n = 1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}'
         self.verify(saytex,latex)
+
+    def test_27(self):
+        saytex = "integral from zero to pi sine squared of x over cosine of x"
+        latex = r'\int_0^{\pi} \frac{\sin^2 \left( x \right)}{\cos \left( x \right)}'
+        self.verify(saytex,latex)
+
         
         
 
