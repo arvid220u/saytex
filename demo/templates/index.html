@@ -162,8 +162,10 @@
         callLatexAPI(LatexAPIURL, syntaxfield.innerHTML.trim(), rawfield, displayfield);
     }
     function naturalLangChange(naturalfield, syntaxfield, rawfield, displayfield) {
-        callLatexAPI(LatexAPIURL, naturalfield.innerHTML.trim(), rawfield, displayfield);
-        callLatexAPI(SaytexAPIURL, naturalfield.innerHTML.trim(), syntaxfield, null);
+        var nattext = naturalfield.innerHTML.trim()
+        nattext = nattext.replace('&nbsp;', ' ');
+        callLatexAPI(LatexAPIURL, nattext, rawfield, displayfield);
+        callLatexAPI(SaytexAPIURL, nattext, syntaxfield, null);
     }
 
 
