@@ -3,18 +3,26 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to SayTeX's documentation!
+Overview
 ==================================
 
-.. toctree::
-   :hidden:
 
-   self
+SayTeX
+-----------------------
 
+SayTeX can convert natural language math expressions into valid LaTeX.
+
+The SayTeX project consists of one main product: the ``saytex`` Python package,
+which provides a simple interface for converting natural language into LaTeX.
+
+Documentation Index
+----------------------
 
 .. toctree::
    :maxdepth: 2
-   
+
+   self
+   philosophy
    installation
    usingpython
    developing
