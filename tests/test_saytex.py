@@ -132,6 +132,11 @@ class TestToLatex(unittest.TestCase):
         saytex = "sign of X over cosine of X"
         latex = r'\frac{\sin \left( x \right)}{\cos \left( x \right)}'
         self.verify(saytex,latex)
+    
+    def test_20(self):
+        saytex = "fraction begin a and begin hey end plus "
+        latex = r'\frac{a}{a} +'
+        self.verify(saytex,latex)
         
 
 if __name__ == '__main__':
