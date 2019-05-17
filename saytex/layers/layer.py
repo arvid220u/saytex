@@ -52,5 +52,6 @@ class SaytexLayer:
         return {"plus",
                 "minus",
                 "times",
-                "multiplied by"}
+                "multiplied by",
+                "equals"}
 
