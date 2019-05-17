@@ -45,10 +45,10 @@ default_layer_priorities = {
     CapitalizationLayer: 1,
     SpokenNumberRecognitionLayer: 1,
     SynonymStandardizationLayer: 1,
-    HandleOfLayer: 2,
-    FromToRecognitionLayer: 2, # this is debatable, but it kind of depends on the capitalization layer
-    DividedByRecognitionLayer: 2,
-    PrettificationLayer: 3
+    HandleOfLayer: 2, # depends on synonym standardization
+    FromToRecognitionLayer: 3, # this is debatable, but it kind of depends on the capitalization layer
+    DividedByRecognitionLayer: 3, # depends on the handle-of layer
+    PrettificationLayer: 4 # should always be done last
 }
 """
 The layer_priorities is a dictionary mapping layer classes to a number, reflecting
