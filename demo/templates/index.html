@@ -35,7 +35,7 @@
 
 <div id='allcontent'>
 
-    <h1>SayTeX</h1>
+    <h1>SayTeX Demo</h1>
 
     <div id="editorcontrolpanel">
         <button id="startButton" disabled>Start</button>
@@ -52,42 +52,35 @@
 
     <div id="fastapi" class='latexsection'>
 
-        <h6>SayTeX API</h6>
-
         <p class="displaylatex">
         $$a^2+b^2=c^2$$
         </p>
 
+        <h6>Speech Recognition Input:</h6>
+
+        <code class="naturalinput" contenteditable="true" spellcheck="false">
+        A squared plus B squared equals C squared
+        </code>
+
+        <h6>SayTeX Syntax:</h6>
+
+        <code class="saytexsyntax" contenteditable="true" spellcheck="false">
+        a squared plus b squared equals c squared
+        </code>
+
+        <h6>LaTeX:</h6>
+
         <code class="rawlatex" contenteditable='true' spellcheck="false">
-        $a^2+b^2=c^2$
+        a^2+b^2=c^2
         </code>
 
         <div>
-            <button class="copybutton" onclick="copyToClipboard('#fastapi .rawlatex')">Copy</button>
+            <button class="copybutton" onclick="copyToClipboard('#fastapi .rawlatex')">Copy LaTeX</button>
         </div>
 
     </div>
 
     <hr>
-
-    <div id="fullapi" class='latexsection'>
-
-
-        <h6>Wolfram Alpha API</h6>
-
-        <p class="displaylatex">
-        $$a^2+b^2=c^2$$
-        </p>
-
-        <code class="rawlatex" contenteditable='true' spellcheck="false">
-        $a^2+b^2=c^2$
-        </code>
-
-        <div>
-            <button class="copybutton" onclick="copyToClipboard('#fullapi .rawlatex')">Copy</button>
-        </div>
-
-    </div>
 
     <hr>
 
@@ -150,10 +143,12 @@
                 if(mytext==' '){
                     return;
                 }
-                rawfield.innerHTML = "$" + mytext + "$";
+                rawfield.innerHTML =  mytext;
 
-                displayfield.innerHTML = "$$" + mytext + "$$";
-                MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+                if (displayfield !== null) {
+                    displayfield.innerHTML = "$$" + mytext + "$$";
+                    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+                }
         });
     }
 
@@ -168,15 +163,12 @@
         stopButton = document.getElementById("stopButton");
         fastRawLatexField = document.querySelector("#fastapi .rawlatex");
         fastDisplayLatexField = document.querySelector("#fastapi .displaylatex");
-        fullRawLatexField = document.querySelector("#fullapi .rawlatex");
-        fullDisplayLatexField = document.querySelector("#fullapi .displaylatex") ;
+        naturalInputField = document.querySelector("#fastapi naturalinput");
+        saytexSyntaxField = document.querySelector("#fastapi saytexsyntax")
 
 
         fastRawLatexField.addEventListener('input', function() {
-            rawLatexChange(fastRawLatexField,fastDisplayLatexField);
-        });
-        fullRawLatexField.addEventListener('input', function() {
-            rawLatexChange(fullRawLatexField,fullDisplayLatexField);
+            rawLatexChange(fastRawLatexField,fastDisplayLatexField, saytexSyntaxField, naturalInputField);
         });
 
 
@@ -208,8 +200,9 @@
                 ncurtext = text;
 
                 // call the fast API!
+                naturalInputField.innerHTML = text
                 callLatexAPI(LatexAPIURL, text, fastRawLatexField, fastDisplayLatexField);
-                callLatexAPI(SaytexAPIURL, text, fastRawLatexField, fullDisplayLatexField);
+                callLatexAPI(SaytexAPIURL, text, saytexSyntaxField, null);
             };
             recognizer.recognized = function (r, ev) {
                 console.log('recognized!');
