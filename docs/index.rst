@@ -15,6 +15,9 @@ SayTeX can convert natural language math expressions into valid LaTeX.
 The SayTeX project consists of one main product: the ``saytex`` Python package,
 which provides a simple interface for converting natural language into LaTeX.
 
+The SayTeX website is at `<https://saytex.xyz>`_ and all code is hosted
+on GitHub: `<https://github.com/arvid220u/saytex>`_.
+
 Documentation Index
 ----------------------
 
