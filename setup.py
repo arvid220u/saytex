@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="SayTeX",
-    version="0.1.2",
+    version="0.1.3",
     author="Arvid Lunnemark",
     author_email="arvid.lunnemark@gmail.com",
     description="Convert natural language math expressions into well-formatted LaTeX.",
