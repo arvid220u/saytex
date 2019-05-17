@@ -110,6 +110,8 @@ class DividedByRecognitionLayer(SaytexLayer):
                 # find matching
                 startindex = findmatching(words, over_index+2, forward=True)
                 return startindex
+            if dafter_string.startswith("superscript"):
+                return self.find_associativity_right(words, over_index+2)
         
         return over_index + 1
     

@@ -157,6 +157,11 @@ class TestToLatex(unittest.TestCase):
         saytex = "a over"
         latex = r'\frac{a}{}'
         self.verify(saytex,latex)
+    
+    def test_25(self):
+        saytex = "one over n squared"
+        latex = r'\frac{1}{n^2}'
+        self.verify(saytex,latex)
         
 
 if __name__ == '__main__':
