@@ -152,6 +152,11 @@ class TestToLatex(unittest.TestCase):
         saytex = "pi squared over six"
         latex = r'\frac{\pi^2}{6}'
         self.verify(saytex,latex)
+    
+    def test_24(self):
+        saytex = "a over"
+        latex = r'\frac{a}{}'
+        self.verify(saytex,latex)
         
 
 if __name__ == '__main__':

@@ -34,10 +34,10 @@ class DividedByRecognitionLayer(SaytexLayer):
                 if final_words[-delta_start_index] != "begin":
                     final_words.insert(-delta_start_index, "begin")
                     final_words.append('end')
-                if input_words[index+1] != "begin":
+                if index+1 >= len(input_words) or input_words[index+1] != "begin":
                     final_words.append("begin")
                 final_words.extend(input_words[index+1:end_index+1])
-                if input_words[index+1] != "begin":
+                if index+1 >= len(input_words) or input_words[index+1] != "begin":
                     final_words.append('end')
                 index = end_index + 1
             else:
@@ -92,6 +92,8 @@ class DividedByRecognitionLayer(SaytexLayer):
 
         :return: index i such that words[over_index+1:i+1] are the denominator
         """
+        if len(words) == over_index+1:
+            return over_index
         # if first word is "begin", then find matching "end"
         if words[over_index+1] == "begin":
             return findmatching(words, over_index+1, w1="begin", w2="end", forward=True)
