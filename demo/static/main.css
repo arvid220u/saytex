@@ -19,6 +19,9 @@ hr {
     width: 15em;
     border-color: rgba(0,0,0,0.3);
 }
+h6 {
+    margin-bottom: 0.5em;
+}
 
 .rawlatex {
     font-family: monospace;

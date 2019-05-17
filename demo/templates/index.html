@@ -48,7 +48,6 @@
         </div>
     </div>
 
-    <hr>
 
     <div id="fastapi" class='latexsection'>
 
@@ -56,33 +55,36 @@
         $$a^2+b^2=c^2$$
         </p>
 
-        <h6>Speech Recognition Input:</h6>
+        <code class="rawlatex" contenteditable='true' spellcheck="false">
+            a^2+b^2=c^2
+            </code>
+
+            <div>
+                <button class="copybutton" onclick="copyToClipboard('#fastapi .rawlatex')">Copy LaTeX</button>
+            </div>
+        
+        <hr style="margin-top: 1.5em">
+
+        <h6>Speech Recognition Input</h6>
 
         <code class="naturalinput" contenteditable="true" spellcheck="false">
         A squared plus B squared equals C squared
         </code>
 
-        <h6>SayTeX Syntax:</h6>
+        <h6>SayTeX Syntax</h6>
 
         <code class="saytexsyntax" contenteditable="true" spellcheck="false">
         a squared plus b squared equals c squared
         </code>
 
-        <h6>LaTeX:</h6>
 
-        <code class="rawlatex" contenteditable='true' spellcheck="false">
-        a^2+b^2=c^2
-        </code>
+        
 
-        <div>
-            <button class="copybutton" onclick="copyToClipboard('#fastapi .rawlatex')">Copy LaTeX</button>
-        </div>
+        
 
     </div>
 
-    <hr>
 
-    <hr>
 
 
 
@@ -153,8 +155,15 @@
     }
 
     function rawLatexChange(rawfield, displayfield) {
-        displayfield.innerHTML = '$' + rawfield.innerHTML.trim() + '$';
+        displayfield.innerHTML = '$$' + rawfield.innerHTML.trim() + '$$';
         MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+    function saytexSyntaxChange(syntaxfield, rawfield, displayfield) {
+        callLatexAPI(LatexAPIURL, syntaxfield.innerHTML.trim(), rawfield, displayfield);
+    }
+    function naturalLangChange(naturalfield, syntaxfield, rawfield, displayfield) {
+        callLatexAPI(LatexAPIURL, naturalfield.innerHTML.trim(), rawfield, displayfield);
+        callLatexAPI(SaytexAPIURL, naturalfield.innerHTML.trim(), syntaxfield, null);
     }
 
 
@@ -163,12 +172,18 @@
         stopButton = document.getElementById("stopButton");
         fastRawLatexField = document.querySelector("#fastapi .rawlatex");
         fastDisplayLatexField = document.querySelector("#fastapi .displaylatex");
-        naturalInputField = document.querySelector("#fastapi naturalinput");
-        saytexSyntaxField = document.querySelector("#fastapi saytexsyntax")
+        naturalInputField = document.querySelector("#fastapi .naturalinput");
+        saytexSyntaxField = document.querySelector("#fastapi .saytexsyntax")
 
 
         fastRawLatexField.addEventListener('input', function() {
-            rawLatexChange(fastRawLatexField,fastDisplayLatexField, saytexSyntaxField, naturalInputField);
+            rawLatexChange(fastRawLatexField,fastDisplayLatexField);
+        });
+        saytexSyntaxField.addEventListener('input', function() {
+            saytexSyntaxChange(saytexSyntaxField, fastRawLatexField, fastDisplayLatexField);
+        });
+        naturalInputField.addEventListener('input', function() {
+            naturalLangChange(naturalInputField, saytexSyntaxField, fastRawLatexField, fastDisplayLatexField);
         });
 
 
