@@ -36,10 +36,26 @@ saytex.layers.from\_to\_recognition module
     :undoc-members:
     :show-inheritance:
 
+saytex.layers.handle\_of module
+-------------------------------
+
+.. automodule:: saytex.layers.handle_of
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 saytex.layers.layer module
 --------------------------
 
 .. automodule:: saytex.layers.layer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+saytex.layers.prettification module
+-----------------------------------
+
+.. automodule:: saytex.layers.prettification
     :members:
     :undoc-members:
     :show-inheritance:

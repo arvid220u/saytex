@@ -24,4 +24,4 @@ Install sphinx: ``pip3 install sphinx``
 
 Install theme: ``pip3 install sphinx_rtd_theme``
 
-To update the docs, run ``sphinx-apidoc -o . ../saytex -f``, then ``rm -rf _build`` followed by ``make html``.
+To update the docs, first update the local installation of saytex by running ``pip3 install -e .`` from the project directory. Then go to the ``docs`` directory and run ``sphinx-apidoc -o . ../saytex -f``, then ``rm -rf _build`` followed by ``make html``.
