@@ -129,7 +129,8 @@ class FromToRecognitionLayer(SaytexLayer):
                     if tostringwords[1].startswith('superscript'):
                         endtoindex = s[endtoindex:].find(tostringwords[1]) + len(tostringwords[1]) + endtoindex
                         break
-                endtoindex = s[endtoindex:].find(tostringwords[0]) + len(tostringwords[0]) + endtoindex
+                if len(tostringwords) > 0:
+                    endtoindex = s[endtoindex:].find(tostringwords[0]) + len(tostringwords[0]) + endtoindex
                 break
 
         

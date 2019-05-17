@@ -137,6 +137,16 @@ class TestToLatex(unittest.TestCase):
         saytex = "fraction begin a and begin hey end plus "
         latex = r'\frac{a}{a} +'
         self.verify(saytex,latex)
+    
+    def test_21(self):
+        saytex = "integral from zero"
+        latex = r'\int_0'
+        self.verify(saytex,latex)
+    
+    def test_22(self):
+        saytex = "integral from zero to"
+        latex = r'\int_0^{}'
+        self.verify(saytex,latex)
         
 
 if __name__ == '__main__':
