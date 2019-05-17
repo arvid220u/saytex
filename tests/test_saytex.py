@@ -147,6 +147,11 @@ class TestToLatex(unittest.TestCase):
         saytex = "integral from zero to"
         latex = r'\int_0^{}'
         self.verify(saytex,latex)
+    
+    def test_23(self):
+        saytex = "pi squared over six"
+        latex = r'\frac{\pi^2}{6}'
+        self.verify(saytex,latex)
         
 
 if __name__ == '__main__':

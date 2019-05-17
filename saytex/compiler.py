@@ -91,8 +91,8 @@ class Saytex:
             # intialize and execute the layer
             layer = layer_class()
             in_progress_string = layer.execute_layer(in_progress_string)
-            print(in_progress_string)
-            print("and that was after layer: " + str(layer_class))
+            #print(in_progress_string)
+            #print("and that was after layer: " + str(layer_class))
 
         # the string that is the result of all layer executions
         saytex_syntax = in_progress_string

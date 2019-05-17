@@ -64,18 +64,22 @@ class DividedByRecognitionLayer(SaytexLayer):
             return findmatching(words, over_index-1, w1="begin", w2="end", forward=False)
         
         before_string = " ".join(words[:over_index])
-        print(before_string)
+        #print(before_string)
         if before_string.endswith("right parenthesis"):
             # find matching
             startindex = findmatching(words, over_index-1, forward=False)
             # check if the previous word could possible be a function word
             if startindex > 0:
-                print(words[startindex-1])
+                #print(words[startindex-1])
                 if words[startindex-1] not in self.saytex_syntax_operators():
                     startindex = startindex - 1
             
             return startindex
         
+        if over_index > 2:
+            if words[over_index-2] == 'superscript':
+                return self.find_associativity_left(words, over_index-2)
+
         return over_index - 1
     
     def find_associativity_right(self, words, over_index):
