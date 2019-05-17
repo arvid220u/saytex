@@ -1,2 +1,2 @@
-source venv/bin/activate
+source .venv/bin/activate
 gunicorn app:app
