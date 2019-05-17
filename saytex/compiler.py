@@ -49,9 +49,9 @@ class Saytex:
             SayTeX strings is a superset of SayTeX Syntax.
 
         :return: A string containing a valid translation of the input string
-            to LaTeX code. If the string does not conform to SayTeX+ (which
-            can only happen if it uses unallowed characters), the
-            InvalidSaytexPlus exception will be raised.
+            to LaTeX code. If the string is not recognizable (that is, it
+            cannot be converted into SayTeX), the UnrecognizableSaytexInput exception 
+            is thrown.
         """
         
         # convert into saytex
