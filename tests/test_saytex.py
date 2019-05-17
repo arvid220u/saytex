@@ -128,5 +128,11 @@ class TestToLatex(unittest.TestCase):
         latex = r"f \left( x \right) = \int \frac{\sin \left( x \right)}{\cos \left( x \right)} \, dx"
         self.verify(saytex, latex)
 
+    def test_19(self):
+        saytex = "sign of X over cosine of X"
+        latex = r'\frac{\sin \left( x \right)}{\cos \left( x \right)}'
+        self.verify(saytex,latex)
+        
+
 if __name__ == '__main__':
     res = unittest.main(verbosity=3, exit=False)
