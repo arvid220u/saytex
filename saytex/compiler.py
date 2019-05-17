@@ -34,6 +34,10 @@ class Saytex:
         """
         self.saytex_syntax_compiler = SaytexSyntax()
 
+        # add the default layers
+        self.layers = set(config.default_layers)
+        self.layer_priorities = dict(config.default_layer_priorities)
+
 
     def to_latex(self, math_string):
         """
@@ -78,17 +82,17 @@ class Saytex:
         # in_progress_string contains the string as it is being converted into saytex
         in_progress_string = math_string
 
-        # get all layers that should be used
-        layers = [layer for layer in config.used_layers if config.used_layers[layer]]
-
         # sort the layers by priority
         # lowest priority comes first (yes, i know, not ideal naming there)
-        layers.sort(key = lambda layer_id : config.layer_priorities[layer_id])
+        sorted_layers = sorted(list(self.layers), key = lambda layer_class : self.layer_priorities[layer_class])
 
         # now apply the layers
-        for layer_id in layers:
-            layer = SaytexLayer.get_layer(layer_id)
+        for layer_class in sorted_layers:
+            # intialize and execute the layer
+            layer = layer_class()
             in_progress_string = layer.execute_layer(in_progress_string)
+            print(in_progress_string)
+            print("and that was after layer: " + str(layer_class))
 
         # the string that is the result of all layer executions
         saytex_syntax = in_progress_string
@@ -99,3 +103,61 @@ class Saytex:
 
         # return the saytex syntax
         return saytex_syntax
+    
+
+    def add_layer(self, layer_class, layer_priority):
+        """
+        Adds a layer to the natural language -> Saytex Syntax conversion process.
+
+        :param layer_class: The class of the layer, which must be a subclass of
+            saytex.layers.layer.Layer. Note that this parameter is not a string, but rather
+            the class itself.
+        :param layer_priority: The priority of the layer, represented as a number.
+            The priority affects in which order the layers are executed, and a lower
+            number means it is executed sooner. The priorities only make sense in
+            relation to other priorities, and the default priorities can be found in
+            saytex.config.
+        
+        :return: None
+        """
+
+        if layer_class in self.layers:
+            # this layer is already here!
+            raise ValueError("Layer already exists!")
+        
+        self.layers.add(layer_class)
+        self.layer_priorities[layer_class] = layer_priority
+    
+    def remove_layer(self, layer_class):
+        """
+        Removes a layer from the conversion process. Can be used to remove
+        default layers.
+
+        :param layer_class: The class of the layer, which must be a subclass of
+            saytex.layers.layer.Layer. Note that this parameter is not a string, but rather
+            the class itself.
+        
+        :return: None
+        """
+
+        if layer_class not in self.layers:
+            raise LookupError("Trying to remove layer that does not exist!")
+        
+        self.layers.remove(layer_class)
+        del self.layer_priorities[layer_class]
+    
+    def get_layers(self):
+        """
+        Returns the set of currently used layers.
+
+        :return: Set of layers.
+        """
+        return set(self.layers)
+    
+    def get_layer_priorities(self):
+        """
+        Returns a dictionary mapping the currently used layers to their priorities.
+
+        :return: Dictionary of layers to numbers.
+        """
+        return dict(self.layer_priorities)
