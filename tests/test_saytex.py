@@ -162,6 +162,12 @@ class TestToLatex(unittest.TestCase):
         saytex = "one over n squared"
         latex = r'\frac{1}{n^2}'
         self.verify(saytex,latex)
+
+    def test_26(self):
+        saytex = "sum from n equals one to infinity one over n squared equals pi squared over six"
+        latex = r'\sum_{n = 1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}'
+        self.verify(saytex,latex)
+        
         
 
 if __name__ == '__main__':
