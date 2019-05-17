@@ -104,7 +104,7 @@ class TestToLatex(unittest.TestCase):
         self.verify(saytex, latex)
     
     def test_14(self):
-        saytex = "open a plus 1 close over b"
+        saytex = "begin a plus 1 end over b"
         latex = r"\frac{a + 1}{b}"
         self.verify(saytex, latex)
     
@@ -122,6 +122,11 @@ class TestToLatex(unittest.TestCase):
         saytex = "f of x equals integral of t squared from zero to x dt"
         latex = "f \\left( x \\right) = \\int_0^{x} t^2 \\, dt"
         self.verify(saytex,latex)
+
+    def test_18(self):
+        saytex = "f of x equals integral of sine of x over cosine of x dx"
+        latex = r"f \left( x \right) = \int \frac{\sin \left( x \right)}{\cos \left( x \right)} \, dx"
+        self.verify(saytex, latex)
 
 if __name__ == '__main__':
     res = unittest.main(verbosity=3, exit=False)

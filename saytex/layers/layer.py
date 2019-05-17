@@ -42,3 +42,15 @@ class SaytexLayer:
             s = r'\b' + word_tuple[0] + r'\b'
             in_progress_string = re.sub(s, word_tuple[1], in_progress_string)
         return in_progress_string
+    
+
+    def saytex_syntax_operators(self):
+        """
+        Returns a set of all recognized operators in SayTeX Syntax.
+        """
+
+        return {"plus",
+                "minus",
+                "times",
+                "multiplied by"}
+
