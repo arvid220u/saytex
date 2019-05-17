@@ -7,6 +7,12 @@ Welcome to SayTeX's documentation!
 ==================================
 
 .. toctree::
+   :hidden:
+
+   self
+
+
+.. toctree::
    :maxdepth: 2
    
    installation

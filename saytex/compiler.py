@@ -110,7 +110,7 @@ class Saytex:
         Adds a layer to the natural language -> Saytex Syntax conversion process.
 
         :param layer_class: The class of the layer, which must be a subclass of
-            saytex.layers.layer.Layer. Note that this parameter is not a string, but rather
+            saytex.layers.layer.SaytexLayer. Note that this parameter is not a string, but rather
             the class itself.
         :param layer_priority: The priority of the layer, represented as a number.
             The priority affects in which order the layers are executed, and a lower
@@ -134,7 +134,7 @@ class Saytex:
         default layers.
 
         :param layer_class: The class of the layer, which must be a subclass of
-            saytex.layers.layer.Layer. Note that this parameter is not a string, but rather
+            saytex.layers.layer.SaytexLayer. Note that this parameter is not a string, but rather
             the class itself.
         
         :return: None

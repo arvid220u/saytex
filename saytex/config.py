@@ -31,8 +31,8 @@ default_layers = {
 The used_layers is a set containing the default layers to be used by Saytex when
 converting natural language into SayTeX Syntax. Changing the layers that are
 in use will affect what spoken math expressions that SayTeX can recognize.
-Each layer must be a subclass of saytex.layers.layer.Layer. Creating new layers is
-as simple as creating a new subclass of saytex.layers.layer.Layer, and then adding
+Each layer must be a subclass of saytex.layers.layer.SaytexLayer. Creating new layers is
+as simple as creating a new subclass of saytex.layers.layer.SaytexLayer, and then adding
 it to the default_layers and default_layer_priorities, or just adding it on a
 case-by-case situation to a Saytex instance.
 """
