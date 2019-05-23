@@ -1,6 +1,11 @@
-Development
+.. _saytex-implementation:
+
+
+Development Notes
 =================
 
+This section should be of little interest to everyone who is not
+a maintainer of SayTeX.
 
 Deploying
 ---------

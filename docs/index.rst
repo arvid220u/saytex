@@ -25,8 +25,9 @@ Documentation Index
    :maxdepth: 2
 
    self
+   gettingstarted
    philosophy
-   installation
-   usingpython
+   advancedusage
+   saytexsyntax
    developing
    Package Reference <saytex>
