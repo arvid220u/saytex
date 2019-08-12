@@ -1,3 +1,5 @@
+.. _saytexsyntaxreference:
+
 saytex.saytexsyntax package
 ===========================
 
