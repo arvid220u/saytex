@@ -23,7 +23,7 @@ class SyntaxDictionary:
     def __init__(self, syntax_file=None, syntax_directory=None):
         """
         Initializes a new SyntaxDictionary using the syntax_file or syntax_directory.
-        Raises exception not exactly one of syntax_file and syntax_directory is None.
+        Raises exception if not exactly one of syntax_file and syntax_directory is None.
         """
         # set the syntax file
         # the syntax file must have the correct format, as specified in config.py
@@ -53,7 +53,8 @@ class SyntaxDictionary:
         elif self.syntax_directory != None:
             self.syntax_list = []
             for f in pkg_resources.resource_listdir(__name__, self.syntax_directory):
-                with open(pkg_resources.resource_filename(__name__, self.syntax_directory + "/" + f), 'r') as sf:
+                syntax_filename = self.syntax_directory + "/" + f
+                with open(pkg_resources.resource_filename(__name__, syntax_filename), 'r') as sf:
                     self.syntax_list.extend(json.load(sf))
         else:
             # should never happen!
@@ -65,11 +66,11 @@ class SyntaxDictionary:
                 raise InvalidSyntaxFile("Every element needs to have a saytex field and a latex field")
             # the length of the saytex command is limited by config
             if len(syntax_item["saytex"].split(" ")) > config.MAX_WORDS_PER_SAYTEX_COMMAND:
-                raise InvalidSyntaxFile("Length of SayTeX command exceeds max length: " + syntax_item["saytex"])
+                raise InvalidSyntaxFile("Length of SayTeX command exceeds max length: " 
+                                        + syntax_item["saytex"])
             # provide default values
             self.make_syntax_entry_default(syntax_item)
             
-        
         # create the syntax_dictionary from saytex to an index in the syntax_list
         self.syntax_dictionary = {}
         for syntax_index, syntax_item in enumerate(self.syntax_list):
@@ -77,6 +78,7 @@ class SyntaxDictionary:
             if syntax_item["saytex"] in self.syntax_dictionary:
                 raise InvalidSyntaxFile("SayTeX command appearing twice: " + syntax_item["saytex"])
             self.syntax_dictionary[syntax_item["saytex"]] = syntax_index
+
 
     def make_syntax_entry_default(self, syntax_item):
         """
@@ -156,4 +158,3 @@ class SyntaxDictionary:
             return {}
         syntax_entry = self.syntax_list[self.syntax_dictionary[saytex]]
         return {"insert_curly_brackets": syntax_entry["insert_curly_brackets_right"]}
-

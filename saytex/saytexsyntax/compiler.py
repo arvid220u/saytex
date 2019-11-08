@@ -54,8 +54,8 @@ class SaytexSyntax:
         """
 
         if not self.is_valid_saytex_syntax(saytex_string):
-            raise SaytexSyntaxError("The input string " + saytex_string + " does not " + 
-                                     "conform to SayTeX Syntax.")
+            raise SaytexSyntaxError("The input string " + saytex_string + " does not " 
+                                    + "conform to SayTeX Syntax.")
 
         # convert into list of words, and then compute the latex string
         word_list = saytex_string.split()
@@ -146,7 +146,8 @@ class SaytexSyntax:
                     pass
             else:
                 # this is not a keyword
-                # if the length of the command is 1, we could possibly interpret this command as an actual word/number
+                # if the length of the command is 1, 
+                # we can interpret this command as an actual word/number
                 # which should just be literally transcribed into latex
                 # remember that by the way we deal with spaces, we need to space-pad a word
                 # also, we want to increase the value since we're now using a non-keyword
@@ -158,21 +159,26 @@ class SaytexSyntax:
                     # if the word only has a single character, then one should not insert brackets
                     if len(word) == 1:
                         next_params["insert_curly_brackets"] = False
-                    processed_word = self.syntax_dictionary.post_process_latex(syntax_entry, **next_params)
+                    processed_word = self.syntax_dictionary.post_process_latex(syntax_entry, 
+                                                                               **next_params)
                     try:
                         succeeding_latex = self.compute_latex(word_list=word_list, 
                                                               word_index=command_index_end, 
                                                               dp_memo=dp_memo, 
                                                               next_params={})
-                        possible_answers.append((processed_word + succeeding_latex[0], succeeding_latex[1] + 1))
+                        possible_answers.append((processed_word + succeeding_latex[0], 
+                                                 succeeding_latex[1] + 1))
                     except SaytexSyntaxError:
                         pass
         
         if len(possible_answers) == 0:
             # we found no possible translations of this string into latex
             # this should never happen, since we can just keep adding regular words instead
-            raise SaytexSyntaxError("No possible translations of the string into LaTeX." + 
-                                    "There is a bug in the implementation of compute_latex.")
+            raise SaytexSyntaxError("No possible translations of the string " 
+                                    + " ".join(word_list[word_index:]) 
+                                    + " into LaTeX." 
+                                    + "This means that there is a bug in the "
+                                    + "implementation of compute_latex.")
         
         # now, return the answer with the minimal value
         chosen_answer = min(possible_answers, key = lambda x: x[1])
@@ -183,11 +189,13 @@ class SaytexSyntax:
             if a[1] == chosen_answer[1]:
                 answer_count += 1
                 if answer_count >= 2:
-                    raise MultipleSaytexInterpretations("The following expression has more than 1 possible interpretation: " \
-                                                        + str(word_list) + " at index " + str(word_index) + \
-                                                        ". The possible interpretations are: " \
-                                                        + chosen_answer[0] + " and " + a[0] + ". Possible answers: " + \
-                                                        str(possible_answers))
+                    raise MultipleSaytexInterpretations("The following expression has more than 1 "
+                                                        + "possible interpretation: "
+                                                        + str(word_list) + " at index " + str(word_index)
+                                                        + ". The possible interpretations are: "
+                                                        + chosen_answer[0] + " and " + a[0]
+                                                        + ". Possible answers: "
+                                                        + str(possible_answers))
 
         # if index is not 0, this is what we should return
         dp_memo[word_index] = chosen_answer
