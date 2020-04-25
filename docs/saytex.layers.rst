@@ -52,6 +52,14 @@ saytex.layers.layer module
     :undoc-members:
     :show-inheritance:
 
+saytex.layers.math\_symbols\_transform module
+---------------------------------------------
+
+.. automodule:: saytex.layers.math_symbols_transform
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 saytex.layers.prettification module
 -----------------------------------
 
