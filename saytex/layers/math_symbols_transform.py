@@ -13,6 +13,7 @@ class MathSymbolsTransformLayer(SaytexLayer):
         '+': 'plus',
         '*': 'times',
         '-': 'minus',
+        'π': 'pi',
     }
 
     def execute_layer(self, input_string):
