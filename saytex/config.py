@@ -7,6 +7,7 @@ the documentation on add_layer and remove_layer of Saytex.
 
 from saytex.layers.speech_recognition_error_correction import SpeechRecognitionErrorCorrectionLayer
 from saytex.layers.case_insensitivity import CaseInsensitivityLayer
+from saytex.layers.math_symbols_transform import MathSymbolsTransformLayer
 from saytex.layers.capitalization import CapitalizationLayer
 from saytex.layers.spoken_number_recognition import SpokenNumberRecognitionLayer
 from saytex.layers.synonym_standardization import SynonymStandardizationLayer
@@ -19,6 +20,7 @@ from saytex.layers.prettification import PrettificationLayer
 default_layers = {
     SpeechRecognitionErrorCorrectionLayer,
     CaseInsensitivityLayer,
+    MathSymbolsTransformLayer,
     CapitalizationLayer,
     SpokenNumberRecognitionLayer,
     SynonymStandardizationLayer,
@@ -42,6 +44,7 @@ case-by-case situation to a Saytex instance.
 default_layer_priorities = {
     SpeechRecognitionErrorCorrectionLayer: 0,
     CaseInsensitivityLayer: 0,
+    MathSymbolsTransformLayer: 0,
     CapitalizationLayer: 1,
     SpokenNumberRecognitionLayer: 1,
     SynonymStandardizationLayer: 1,
